@@ -1,0 +1,62 @@
+[
+  {
+    "productId": "123e4567-e89b-12d3-a456-426614174000",
+    "name": "Laptop X1",
+    "description": "Laptop high performance",
+    "price": 1500.0,
+    "stock": 50,
+    "reorderLevel": 10,
+    "rating": 4.5,
+    "categoryId": "1b2a3347-e77c-49a8-97d4-436614185001",
+    "brandId": "abcd1234-e123-4567-b89c-d1ef23456gh7",
+    "supplierId": "efgh5678-e123-4567-b89c-d1ef23456gh8"
+  },
+  {
+    "productId": "123e4567-e89b-12d3-a456-426614174001",
+    "name": "Smartphone Z5",
+    "description": "Latest model smartphone",
+    "price": 999.99,
+    "stock": 200,
+    "reorderLevel": 5,
+    "rating": 3.5,
+    "categoryId": "1b2a3347-e77c-49a8-97d4-436614185002",
+    "brandId": "ijkl2345-e123-4567-b89c-d1ef23456gh9",
+    "supplierId": "ijkl6789-e123-4567-b89c-d1ef23456gh0"
+  },
+  {
+    "productId": "123e4567-e89b-12d3-a456-426614174002",
+    "name": "Tablet A3",
+    "description": "Portable tablet device",
+    "price": 599.0,
+    "stock": 150,
+    "reorderLevel": 20,
+    "rating": 2.5,
+    "categoryId": "1b2a3347-e77c-49a8-97d4-436614185003",
+    "brandId": "mnop3456-e123-4567-b89c-d1ef23456gh1",
+    "supplierId": "mnop7890-e123-4567-b89c-d1ef23456gh2"
+  },
+  {
+    "productId": "123e4567-e89b-12d3-a456-426614174003",
+    "name": "Gaming Mouse Y9",
+    "description": "Ergonomic gaming mouse",
+    "price": 79.99,
+    "stock": 300,
+    "reorderLevel": 15,
+    "rating": 4.0,
+    "categoryId": "1b2a3347-e77c-49a8-97d4-436614185004",
+    "brandId": "qrst4567-e123-4567-b89c-d1ef23456gh3",
+    "supplierId": "qrst8901-e123-4567-b89c-d1ef23456gh4"
+  },
+  {
+    "productId": "123e4567-e89b-12d3-a456-426614174004",
+    "name": "Wireless Keyboard K3",
+    "description": "Slim wireless keyboard",
+    "price": 49.99,
+    "stock": 400,
+    "reorderLevel": 25,
+    "rating": 3.0,
+    "categoryId": "1b2a3347-e77c-49a8-97d4-436614185005",
+    "brandId": "uvwx5678-e123-4567-b89c-d1ef23456gh5",
+    "supplierId": "uvwx9012-e123-4567-b89c-d1ef23456gh6"
+  }
+]

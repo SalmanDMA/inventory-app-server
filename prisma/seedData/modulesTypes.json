@@ -1,0 +1,20 @@
+[
+  {
+    "moduleTypeId": "53641a8f-976c-4062-b1d6-49e013bd8778",
+    "name": "Menu Directory",
+    "icon": "AppWindow",
+    "description": "Module type for menu directory"
+  },
+  {
+    "moduleTypeId": "c2dfc5bc-e84c-490c-89a9-9dd3c5e4f18f",
+    "name": "Route Menu",
+    "icon": "Route",
+    "description": "Module type for route menu"
+  },
+  {
+    "moduleTypeId": "c858eb45-01b9-44a6-a643-13edd0a00052",
+    "name": "Hidden Directory",
+    "icon": "FileWarning",
+    "description": "Module type for hidden directory"
+  }
+]

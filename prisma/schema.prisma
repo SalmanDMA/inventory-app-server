@@ -1,0 +1,257 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Uploads {
+  uploadId          String @id @default(uuid())
+  filename          String
+  category          String // ini category lebih kepada untuk table mana peruntukan nya
+  path              String
+  type              String
+  mime              String
+  extension         String
+  size              Int
+  filenameOrigin    String
+
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  deletedAt         DateTime?
+
+  user              Users[]
+  product           Products[]
+}
+
+model Users {
+  userId        String    @id @default(uuid())
+  name          String    
+  username      String    @unique
+  email         String    @unique
+  password      String?
+  phone         String?
+  address       String?
+  avatarId      String?
+  roleId        String
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  deletedAt     DateTime?
+
+  avatar        Uploads?  @relation(fields: [avatarId], references: [uploadId])
+  role          Roles     @relation(fields: [roleId], references: [roleId])
+  sales         Sales[]
+}
+
+
+model Roles {
+  roleId              String     @id @default(uuid())
+  name                String     @unique
+  alias               String
+  color               String
+  description         String?
+  users               Users[]   
+  roleModules         RoleModules[] 
+
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  deletedAt     DateTime?
+}
+
+model Modules {
+  moduleId            Int       @id @default(autoincrement())
+  moduleTypeId        String
+  parentId            Int?    
+  path                String?
+  name                String     @unique
+  icon                String?
+  route               String?
+  description         String?
+  roleModules         RoleModules[] 
+
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  deletedAt     DateTime?
+
+  moduleType          ModulesTypes  @relation(fields: [moduleTypeId], references: [moduleTypeId])
+  parentModule        Modules?      @relation("ParentChild", fields: [parentId], references: [moduleId])
+  childModules        Modules[]     @relation("ParentChild")
+}
+
+model ModulesTypes {
+  moduleTypeId        String     @id @default(uuid())
+  name                String     @unique
+  icon                String?
+  description         String?
+  modules             Modules[]
+
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  deletedAt     DateTime?
+}
+
+model RoleModules {
+  roleModuleId        String     @id @default(uuid())
+  roleId              String
+  moduleId            Int
+  checked             Boolean
+  role                Roles      @relation(fields: [roleId], references: [roleId])
+  module              Modules    @relation(fields: [moduleId], references: [moduleId])
+
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  deletedAt     DateTime?
+}
+
+model Products {
+  productId      String         @id @default(uuid())
+  name            String
+  description     String?
+  price           Float
+  rating          Float
+  stock           Int
+  reorderLevel   Int            // Batas stok minimum sebelum harus reorder
+  categoryId     String
+  brandId        String
+  supplierId     String?
+  imageId          String?
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  deletedAt       DateTime?
+
+  image           Uploads?       @relation(fields: [imageId], references: [uploadId])
+  category        Categories     @relation(fields: [categoryId], references: [categoryId])
+  brand           Brands         @relation(fields: [brandId], references: [brandId])
+  supplier        Suppliers?     @relation(fields: [supplierId], references: [supplierId])
+  stockMovements  StockMovements[]
+  purchaseDetails PurchaseDetails[]
+  salesDetails    SalesDetails[]
+}
+
+model Categories {
+  categoryId String      @id @default(uuid())
+  name        String
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  deletedAt   DateTime?
+  products    Products[]
+}
+
+model Brands {
+  brandId   String      @id @default(uuid())
+  name       String
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+  deletedAt  DateTime?
+  products   Products[]
+}
+
+model Suppliers {
+  supplierId String      @id @default(uuid())
+  name        String
+  contact     String
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  deletedAt   DateTime?
+
+  products    Products[]
+  purchases   Purchases[]
+}
+
+model StockMovements {
+  stockMovementId String      @id @default(uuid())
+  productId        String      
+  warehouseId      String
+  movementType     MovementType // 'IN' for incoming, 'OUT' for outgoing
+  quantity          Int
+  transactionDate  DateTime
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
+  deletedAt    DateTime?
+
+  product           Products     @relation(fields: [productId], references: [productId])
+  warehouse         Warehouses   @relation(fields: [warehouseId], references: [warehouseId])
+}
+
+model Purchases {
+  purchaseId  String      @id @default(uuid())
+  supplierId  String
+  warehouseId String
+  total        Float
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  deletedAt    DateTime?
+  
+  supplier     Suppliers  @relation(fields: [supplierId], references: [supplierId])
+  warehouse    Warehouses @relation(fields: [warehouseId], references: [warehouseId])
+  details      PurchaseDetails[]
+}
+
+model PurchaseDetails {
+  purchaseDetailId String    @id @default(uuid())
+  purchaseId       String
+  productId        String
+  quantity          Int
+  price             Float
+  
+  purchase          Purchases @relation(fields: [purchaseId], references: [purchaseId])
+  product           Products  @relation(fields: [productId], references: [productId])
+  
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  deletedAt         DateTime?
+}
+
+model Sales {
+  saleId      String      @id @default(uuid())
+  userId      String     
+  warehouseId String
+  total        Float
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  deletedAt    DateTime?
+  
+  warehouse    Warehouses @relation(fields: [warehouseId], references: [warehouseId])
+  user         Users      @relation(fields: [userId], references: [userId]) 
+  details      SalesDetails[]
+}
+
+model SalesDetails {
+  salesDetailId String    @id @default(uuid())
+  saleId        String
+  productId     String
+  quantity       Int
+  price          Float
+  
+  sale           Sales      @relation(fields: [saleId], references: [saleId])
+  product        Products   @relation(fields: [productId], references: [productId])
+  
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+  deletedAt      DateTime?
+}
+
+model Warehouses {
+  warehouseId   String     @id @default(uuid())
+  name           String
+  location       String
+
+  products       StockMovements[]
+  sales          Sales[]
+  purchases      Purchases[]
+
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+  deletedAt      DateTime?
+}
+
+enum MovementType {
+  IN
+  OUT
+}

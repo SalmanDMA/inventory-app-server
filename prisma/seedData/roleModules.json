@@ -1,0 +1,26 @@
+[
+  {
+    "roleModuleId": "73c44022-4515-4604-8135-ca4cd0ba2dde",
+    "roleId": "2a730a8e-5ba3-43bb-b387-928b766976c0",
+    "moduleId": 1,
+    "checked": true
+  },
+  {
+    "roleModuleId": "de63f4ef-740f-4c6a-ac44-4e277c8d4324",
+    "roleId": "2a730a8e-5ba3-43bb-b387-928b766976c0",
+    "moduleId": 2,
+    "checked": true
+  },
+  {
+    "roleModuleId": "40576ad1-963d-48cf-85b1-a3441c7668c1",
+    "roleId": "4a3bd79b-469a-4e3e-b1be-52f7ce9ae685",
+    "moduleId": 1,
+    "checked": true
+  },
+  {
+    "roleModuleId": "abacaf13-85d9-411e-b015-3a092d3222b7",
+    "roleId": "a4591567-0f2d-446e-b5f2-cfdfba08078b",
+    "moduleId": 1,
+    "checked": true
+  }
+]

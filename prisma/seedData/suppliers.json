@@ -1,0 +1,27 @@
+[
+  {
+    "supplierId": "efgh5678-e123-4567-b89c-d1ef23456gh8",
+    "name": "Supplier 1",
+    "contact": "contact1@example.com"
+  },
+  {
+    "supplierId": "ijkl6789-e123-4567-b89c-d1ef23456gh0",
+    "name": "Supplier 2",
+    "contact": "contact2@example.com"
+  },
+  {
+    "supplierId": "mnop7890-e123-4567-b89c-d1ef23456gh2",
+    "name": "Supplier 3",
+    "contact": "contact3@example.com"
+  },
+  {
+    "supplierId": "qrst8901-e123-4567-b89c-d1ef23456gh4",
+    "name": "Supplier 4",
+    "contact": "contact4@example.com"
+  },
+  {
+    "supplierId": "uvwx9012-e123-4567-b89c-d1ef23456gh6",
+    "name": "Supplier 5",
+    "contact": "contact5@example.com"
+  }
+]

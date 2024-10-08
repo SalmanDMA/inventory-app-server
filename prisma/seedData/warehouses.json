@@ -1,0 +1,17 @@
+[
+  {
+    "warehouseId": "a86c58b9-b9ff-4c68-88a8-f0e6e1b1742a",
+    "name": "Main Warehouse",
+    "location": "Jakarta"
+  },
+  {
+    "warehouseId": "b72c47a1-3e65-4c6b-84a8-cbfcf673b39e",
+    "name": "Secondary Warehouse",
+    "location": "Bandung"
+  },
+  {
+    "warehouseId": "c6e7f4e1-5f70-4b7c-9c9d-2b9b9b9b9b9b",
+    "name": "Third Warehouse",
+    "location": "Surabaya"
+  }
+]

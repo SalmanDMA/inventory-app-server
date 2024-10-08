@@ -1,0 +1,22 @@
+[
+  {
+    "brandId": "abcd1234-e123-4567-b89c-d1ef23456gh7",
+    "name": "Brand X"
+  },
+  {
+    "brandId": "ijkl2345-e123-4567-b89c-d1ef23456gh9",
+    "name": "Brand Z"
+  },
+  {
+    "brandId": "mnop3456-e123-4567-b89c-d1ef23456gh1",
+    "name": "Brand Y"
+  },
+  {
+    "brandId": "qrst4567-e123-4567-b89c-d1ef23456gh3",
+    "name": "Brand A"
+  },
+  {
+    "brandId": "uvwx5678-e123-4567-b89c-d1ef23456gh5",
+    "name": "Brand B"
+  }
+]

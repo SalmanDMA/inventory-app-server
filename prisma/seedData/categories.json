@@ -1,0 +1,22 @@
+[
+  {
+    "categoryId": "1b2a3347-e77c-49a8-97d4-436614185001",
+    "name": "Electronics"
+  },
+  {
+    "categoryId": "1b2a3347-e77c-49a8-97d4-436614185002",
+    "name": "Mobile Phones"
+  },
+  {
+    "categoryId": "1b2a3347-e77c-49a8-97d4-436614185003",
+    "name": "Tablets"
+  },
+  {
+    "categoryId": "1b2a3347-e77c-49a8-97d4-436614185004",
+    "name": "Accessories"
+  },
+  {
+    "categoryId": "1b2a3347-e77c-49a8-97d4-436614185005",
+    "name": "Computers"
+  }
+]
