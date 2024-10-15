@@ -1,22 +1,37 @@
 [
   {
-    "categoryId": "1b2a3347-e77c-49a8-97d4-436614185001",
-    "name": "Electronics"
+    "categoryId": 1,
+    "name": "Electronics",
+    "parentId": null,
+    "description": "Module for electronics",
+    "path": "/1/"
   },
   {
-    "categoryId": "1b2a3347-e77c-49a8-97d4-436614185002",
-    "name": "Mobile Phones"
+    "categoryId": 2,
+    "name": "Mobile Phones",
+    "parentId": 1,
+    "description": "Module for electronic mobile phones",
+    "path": "/1/2/"
   },
   {
-    "categoryId": "1b2a3347-e77c-49a8-97d4-436614185003",
-    "name": "Tablets"
+    "categoryId": 3,
+    "name": "Tablets",
+    "parentId": 1,
+    "description": "Module for electronic tablets",
+    "path": "/1/3/"
   },
   {
-    "categoryId": "1b2a3347-e77c-49a8-97d4-436614185004",
-    "name": "Accessories"
+    "categoryId": 4,
+    "name": "Computers",
+    "parentId": 1,
+    "description": "Module for electronic computers",
+    "path": "/1/4/"
   },
   {
-    "categoryId": "1b2a3347-e77c-49a8-97d4-436614185005",
-    "name": "Computers"
+    "categoryId": 5,
+    "name": "Accessories",
+    "parentId": null,
+    "description": "Module for accessories",
+    "path": "/5/"
   }
 ]

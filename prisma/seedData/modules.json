@@ -14,49 +14,99 @@
     "moduleTypeId": "53641a8f-976c-4062-b1d6-49e013bd8778",
     "parentId": null,
     "path": "/2/",
-    "name": "Inventory",
-    "icon": "SlidersHorizontal",
-    "route": "/dashboard/inventory",
-    "description": "Module for managing inventory"
-  },
-  {
-    "moduleId": 3,
-    "moduleTypeId": "53641a8f-976c-4062-b1d6-49e013bd8778",
-    "parentId": null,
-    "path": "/3/",
     "name": "Management",
-    "icon": "SquareKanban",
+    "icon": "FolderPlus",
     "route": null,
     "description": "Module for management"
   },
   {
-    "moduleId": 4,
+    "moduleId": 3,
     "moduleTypeId": "c2dfc5bc-e84c-490c-89a9-9dd3c5e4f18f",
-    "parentId": 3,
-    "path": "/3/4/",
+    "parentId": 2,
+    "path": "/2/3/",
     "name": "Users",
     "icon": "Users",
     "route": "/dashboard/users",
     "description": "Module for users"
   },
   {
-    "moduleId": 5,
+    "moduleId": 4,
     "moduleTypeId": "c2dfc5bc-e84c-490c-89a9-9dd3c5e4f18f",
-    "parentId": 3,
-    "path": "/3/5/",
+    "parentId": 2,
+    "path": "/2/4/",
     "name": "Roles",
     "icon": "Gamepad2",
     "route": "/dashboard/roles",
     "description": "Module for roles"
   },
   {
-    "moduleId": 6,
+    "moduleId": 5,
     "moduleTypeId": "c2dfc5bc-e84c-490c-89a9-9dd3c5e4f18f",
-    "parentId": 3,
-    "path": "/3/6/",
+    "parentId": 2,
+    "path": "/2/5/",
     "name": "Modules",
     "icon": "Layers",
     "route": "/dashboard/modules",
     "description": "Module for modules"
+  },
+  {
+    "moduleId": 6,
+    "moduleTypeId": "53641a8f-976c-4062-b1d6-49e013bd8778",
+    "parentId": null,
+    "path": "/6/",
+    "name": "Products",
+    "icon": "FolderPlus",
+    "route": null,
+    "description": "Module for product"
+  },
+  {
+    "moduleId": 7,
+    "moduleTypeId": "c2dfc5bc-e84c-490c-89a9-9dd3c5e4f18f",
+    "parentId": 6,
+    "path": "/6/7/",
+    "name": "Data",
+    "icon": "PackageSearch",
+    "route": "/dashboard/products",
+    "description": "Module for product data"
+  },
+  {
+    "moduleId": 8,
+    "moduleTypeId": "c2dfc5bc-e84c-490c-89a9-9dd3c5e4f18f",
+    "parentId": 6,
+    "path": "/6/8/",
+    "name": "Category",
+    "icon": "ChartBarStacked",
+    "route": "/dashboard/products/categories",
+    "description": "Module for product category"
+  },
+  {
+    "moduleId": 9,
+    "moduleTypeId": "c2dfc5bc-e84c-490c-89a9-9dd3c5e4f18f",
+    "parentId": 6,
+    "path": "/6/9/",
+    "name": "Brand",
+    "icon": "Dices",
+    "route": "/dashboard/products/brands",
+    "description": "Module for product brand"
+  },
+  {
+    "moduleId": 10,
+    "moduleTypeId": "c2dfc5bc-e84c-490c-89a9-9dd3c5e4f18f",
+    "parentId": 6,
+    "path": "/6/10/",
+    "name": "Supplier",
+    "icon": "Cable",
+    "route": "/dashboard/products/suppliers",
+    "description": "Module for product supplier"
+  },
+  {
+    "moduleId": 11,
+    "moduleTypeId": "53641a8f-976c-4062-b1d6-49e013bd8778",
+    "parentId": null,
+    "path": "/11/",
+    "name": "Warehouse",
+    "icon": "Warehouse",
+    "route": "/dashboard/warehouses",
+    "description": "Module for warehouse"
   }
 ]

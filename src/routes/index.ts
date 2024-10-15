@@ -11,6 +11,10 @@ import roleModuleRoutes from './rolemodule';
 import moduleTypeRoutes from './moduleType';
 import uploadRoutes from './upload';
 import fileRoutes from './file';
+import warehouseRoutes from './warehouse';
+import categoryRoutes from './category';
+import brandRoutes from './brand';
+import supplierRoutes from './supplier';
 
 const apiRouter = express.Router();
 
@@ -25,5 +29,9 @@ apiRouter.use('/roles', roleRoutes);
 apiRouter.use('/roles', roleModuleRoutes);
 apiRouter.use('/modules', moduleRoutes);
 apiRouter.use('/modules-types', moduleTypeRoutes);
+apiRouter.use('/categories', categoryRoutes);
+apiRouter.use('/brands', brandRoutes);
+apiRouter.use('/suppliers', supplierRoutes);
+apiRouter.use('/warehouses', warehouseRoutes);
 
 export default apiRouter;

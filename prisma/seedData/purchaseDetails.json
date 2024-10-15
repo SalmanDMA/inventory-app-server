@@ -4,34 +4,26 @@
     "purchaseId": "333e4567-e89b-12d3-a456-426614174000",
     "productId": "123e4567-e89b-12d3-a456-426614174000",
     "quantity": 10,
-    "price": 1500.0
+    "price": 1500.0,
+    "discount": 0.1,
+    "tax": 0.1
   },
   {
     "purchaseDetailId": "444e4567-e89b-12d3-a456-426614174001",
     "purchaseId": "333e4567-e89b-12d3-a456-426614174001",
     "productId": "123e4567-e89b-12d3-a456-426614174001",
     "quantity": 20,
-    "price": 999.99
+    "price": 999.99,
+    "discount": 0.2,
+    "tax": 0.2
   },
   {
     "purchaseDetailId": "444e4567-e89b-12d3-a456-426614174002",
     "purchaseId": "333e4567-e89b-12d3-a456-426614174002",
     "productId": "123e4567-e89b-12d3-a456-426614174002",
     "quantity": 5,
-    "price": 599.0
-  },
-  {
-    "purchaseDetailId": "444e4567-e89b-12d3-a456-426614174003",
-    "purchaseId": "333e4567-e89b-12d3-a456-426614174003",
-    "productId": "123e4567-e89b-12d3-a456-426614174003",
-    "quantity": 50,
-    "price": 79.99
-  },
-  {
-    "purchaseDetailId": "444e4567-e89b-12d3-a456-426614174004",
-    "purchaseId": "333e4567-e89b-12d3-a456-426614174004",
-    "productId": "123e4567-e89b-12d3-a456-426614174004",
-    "quantity": 30,
-    "price": 49.99
+    "price": 599.0,
+    "discount": 0.3,
+    "tax": 0.3
   }
 ]

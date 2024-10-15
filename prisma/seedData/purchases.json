@@ -4,34 +4,39 @@
     "supplierId": "efgh5678-e123-4567-b89c-d1ef23456gh8",
     "warehouseId": "c6e7f4e1-5f70-4b7c-9c9d-2b9b9b9b9b9b",
     "total": 7500.0,
-    "createdAt": "2024-10-01T12:34:56Z"
+    "paymentStatus": "PAID",
+    "paymentMethod": "CREDITCARD"
   },
   {
     "purchaseId": "333e4567-e89b-12d3-a456-426614174001",
     "supplierId": "ijkl6789-e123-4567-b89c-d1ef23456gh0",
     "warehouseId": "c6e7f4e1-5f70-4b7c-9c9d-2b9b9b9b9b9b",
     "total": 12000.0,
-    "createdAt": "2024-10-02T09:12:34Z"
+    "paymentStatus": "UNPAID",
+    "paymentMethod": "CASH"
   },
   {
     "purchaseId": "333e4567-e89b-12d3-a456-426614174002",
     "supplierId": "mnop7890-e123-4567-b89c-d1ef23456gh2",
     "warehouseId": "b72c47a1-3e65-4c6b-84a8-cbfcf673b39e",
     "total": 2500.0,
-    "createdAt": "2024-10-03T08:30:21Z"
+    "paymentStatus": "CANCELLED",
+    "paymentMethod": "CASH"
   },
   {
     "purchaseId": "333e4567-e89b-12d3-a456-426614174003",
     "supplierId": "qrst8901-e123-4567-b89c-d1ef23456gh4",
     "warehouseId": "b72c47a1-3e65-4c6b-84a8-cbfcf673b39e",
     "total": 14500.0,
-    "createdAt": "2024-10-03T10:45:12Z"
+    "paymentStatus": "PAID",
+    "paymentMethod": "CREDITCARD"
   },
   {
     "purchaseId": "333e4567-e89b-12d3-a456-426614174004",
     "supplierId": "uvwx9012-e123-4567-b89c-d1ef23456gh6",
     "warehouseId": "a86c58b9-b9ff-4c68-88a8-f0e6e1b1742a",
     "total": 5200.0,
-    "createdAt": "2024-10-04T15:20:00Z"
+    "paymentStatus": "UNPAID",
+    "paymentMethod": "CASH"
   }
 ]

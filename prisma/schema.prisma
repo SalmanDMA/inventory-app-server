@@ -27,6 +27,7 @@ model Uploads {
 
   user              Users[]
   product           Products[]
+  brand             Brands[]
 }
 
 model Users {
@@ -47,6 +48,7 @@ model Users {
   avatar        Uploads?  @relation(fields: [avatarId], references: [uploadId])
   role          Roles     @relation(fields: [roleId], references: [roleId])
   sales         Sales[]
+  warehouses     Warehouses[]
 }
 
 
@@ -110,17 +112,24 @@ model RoleModules {
 }
 
 model Products {
-  productId      String         @id @default(uuid())
+  productId       String         @id @default(uuid())
+  sku             String         @unique
+  discount        Float?
+  costPrice       Float
   name            String
   description     String?
   price           Float
-  rating          Float
+  rating          Float?
   stock           Int
-  reorderLevel   Int            // Batas stok minimum sebelum harus reorder
-  categoryId     String
-  brandId        String
-  supplierId     String?
-  imageId          String?
+  reorderLevel    Int            // Batas stok minimum sebelum harus reorder
+  categoryId      Int
+  brandId         String
+  supplierId      String
+  imageId         String?
+  height          Float?
+  width           Float?
+  weight          Float?
+
   createdAt       DateTime       @default(now())
   updatedAt       DateTime       @updatedAt
   deletedAt       DateTime?
@@ -135,27 +144,45 @@ model Products {
 }
 
 model Categories {
-  categoryId String      @id @default(uuid())
-  name        String
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
-  deletedAt   DateTime?
-  products    Products[]
+  categoryId          Int      @id @default(autoincrement())
+  parentId            Int?    
+  path                String?
+  name                String     @unique
+  alias               String
+  description         String?
+  
+  createdAt           DateTime    @default(now())
+  updatedAt           DateTime    @updatedAt
+  deletedAt           DateTime?
+  
+  products            Products[]
+  parentCategory        Categories?      @relation("ParentChild", fields: [parentId], references: [categoryId])
+  childCategories        Categories[]     @relation("ParentChild")
 }
 
 model Brands {
-  brandId   String      @id @default(uuid())
-  name       String
-  createdAt  DateTime    @default(now())
-  updatedAt  DateTime    @updatedAt
-  deletedAt  DateTime?
-  products   Products[]
+  brandId       String      @id @default(uuid())
+  name          String
+  description   String?
+  imageId       String?
+  alias         String?
+
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  deletedAt     DateTime?
+
+  products      Products[]
+  image         Uploads?    @relation(fields: [imageId], references: [uploadId])
 }
 
 model Suppliers {
   supplierId String      @id @default(uuid())
   name        String
-  contact     String
+  email       String
+  phone       String
+  address     String
+  country     String?
+
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
   deletedAt   DateTime?
@@ -165,86 +192,104 @@ model Suppliers {
 }
 
 model StockMovements {
-  stockMovementId String      @id @default(uuid())
-  productId        String      
-  warehouseId      String
-  movementType     MovementType // 'IN' for incoming, 'OUT' for outgoing
-  quantity          Int
-  transactionDate  DateTime
-  createdAt         DateTime     @default(now())
-  updatedAt         DateTime     @updatedAt
-  deletedAt    DateTime?
+  stockMovementId      String      @id @default(uuid())
+  productId            String      
+  warehouseId          String
+  movementType         MovementType // 'IN' for incoming, 'OUT' for outgoing
+  movementReason       String?
+  quantity             Int
+  transactionDate      DateTime
+
+  createdAt            DateTime     @default(now())
+  updatedAt            DateTime     @updatedAt
+  deletedAt            DateTime?
 
   product           Products     @relation(fields: [productId], references: [productId])
   warehouse         Warehouses   @relation(fields: [warehouseId], references: [warehouseId])
 }
 
 model Purchases {
-  purchaseId  String      @id @default(uuid())
-  supplierId  String
-  warehouseId String
-  total        Float
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-  deletedAt    DateTime?
+  purchaseId          String      @id @default(uuid())
+  supplierId          String
+  warehouseId         String
+  total               Float
+  paymentStatus       PaymentStatus  
+  paymentMethod       PaymentMethod  
+
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+  deletedAt           DateTime?
   
-  supplier     Suppliers  @relation(fields: [supplierId], references: [supplierId])
-  warehouse    Warehouses @relation(fields: [warehouseId], references: [warehouseId])
-  details      PurchaseDetails[]
+  supplier            Suppliers  @relation(fields: [supplierId], references: [supplierId])
+  warehouse           Warehouses @relation(fields: [warehouseId], references: [warehouseId])
+  details             PurchaseDetails[]
 }
 
 model PurchaseDetails {
-  purchaseDetailId String    @id @default(uuid())
-  purchaseId       String
-  productId        String
-  quantity          Int
-  price             Float
+  purchaseDetailId        String    @id @default(uuid())
+  purchaseId              String
+  productId               String
+  quantity                Int
+  price                   Float
+  discount                Float?
+  tax                     Float?
+
+  createdAt               DateTime  @default(now())
+  updatedAt               DateTime  @updatedAt
+  deletedAt               DateTime?
   
-  purchase          Purchases @relation(fields: [purchaseId], references: [purchaseId])
-  product           Products  @relation(fields: [productId], references: [productId])
-  
-  createdAt         DateTime  @default(now())
-  updatedAt         DateTime  @updatedAt
-  deletedAt         DateTime?
+  purchase                Purchases @relation(fields: [purchaseId], references: [purchaseId])
+  product                 Products  @relation(fields: [productId], references: [productId])
 }
 
 model Sales {
-  saleId      String      @id @default(uuid())
-  userId      String     
-  warehouseId String
-  total        Float
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-  deletedAt    DateTime?
+  saleId              String      @id @default(uuid())
+  userId              String     
+  warehouseId         String
+  total               Float
+  paymentStatus       PaymentStatus  
+  paymentMethod       PaymentMethod
+
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+  deletedAt           DateTime?
   
-  warehouse    Warehouses @relation(fields: [warehouseId], references: [warehouseId])
-  user         Users      @relation(fields: [userId], references: [userId]) 
-  details      SalesDetails[]
+  warehouse           Warehouses @relation(fields: [warehouseId], references: [warehouseId])
+  user                Users      @relation(fields: [userId], references: [userId]) 
+  details             SalesDetails[]
 }
 
 model SalesDetails {
-  salesDetailId String    @id @default(uuid())
-  saleId        String
-  productId     String
-  quantity       Int
-  price          Float
+  salesDetailId           String    @id @default(uuid())
+  saleId                  String
+  productId               String
+  quantity                Int
+  price                   Float
+  discount                Float?
+  tax                     Float?
+
+  createdAt               DateTime   @default(now())
+  updatedAt               DateTime   @updatedAt
+  deletedAt               DateTime?
   
-  sale           Sales      @relation(fields: [saleId], references: [saleId])
-  product        Products   @relation(fields: [productId], references: [productId])
-  
-  createdAt      DateTime   @default(now())
-  updatedAt      DateTime   @updatedAt
-  deletedAt      DateTime?
+  sale                    Sales      @relation(fields: [saleId], references: [saleId])
+  product                 Products   @relation(fields: [productId], references: [productId])
 }
 
 model Warehouses {
-  warehouseId   String     @id @default(uuid())
+  warehouseId    String     @id @default(uuid())
   name           String
   location       String
+  capacity       Int
+  description    String?
+  picId          String
+  status         WarehouseStatus?
 
   products       StockMovements[]
   sales          Sales[]
   purchases      Purchases[]
+  pic            Users      @relation(fields: [picId], references: [userId])
+  
 
   createdAt      DateTime   @default(now())
   updatedAt      DateTime   @updatedAt
@@ -254,4 +299,21 @@ model Warehouses {
 enum MovementType {
   IN
   OUT
+}
+
+enum PaymentStatus {
+  PAID
+  UNPAID
+  OVERDUE
+  CANCELLED
+}
+
+enum PaymentMethod {
+  CASH
+  CREDITCARD
+}
+
+enum WarehouseStatus {
+  AVAILABLE
+  FULL
 }

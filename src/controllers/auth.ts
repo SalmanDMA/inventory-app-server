@@ -1,10 +1,7 @@
 import { Request, Response } from 'express';
-import dotenv from 'dotenv';
 import { handleChangePassword, handleForgotPassword, handleSignIn } from '../services/auth';
 import InvariantError from '../exeptions/InvariantError';
 import { errorResponse, successResponse } from '../utils/response';
-
-dotenv.config();
 
 export const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 

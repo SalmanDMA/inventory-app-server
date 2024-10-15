@@ -1,8 +1,5 @@
 import jwt from 'jsonwebtoken';
-import dotenv from 'dotenv';
 import InvariantError from '../exeptions/InvariantError';
-
-dotenv.config();
 
 export interface IGenerateToken {
   payload: {

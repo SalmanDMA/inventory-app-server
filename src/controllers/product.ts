@@ -1,33 +1,84 @@
 import { Request, Response } from 'express';
-import { PrismaClient } from '@prisma/client';
+import { ProductService } from '../services/product';
+import { successResponse, errorResponse } from '../utils/response';
 
-const prisma = new PrismaClient();
+const productService = new ProductService();
 
 export const getProducts = async (req: Request, res: Response): Promise<void> => {
   try {
-    const search = req.query.search?.toString();
-    const products = await prisma.products.findMany({
-      where: {
-        name: {
-          contains: search,
-        },
-      },
-    });
-
-    res.json(products);
+    const products = await productService.getProducts();
+    successResponse(res, 'Products retrieved successfully', 200, products);
   } catch (error) {
-    res.status(500).json({ message: 'Error retrieving products' });
+    const errorMessage = (error as Error).message || 'Something went wrong';
+    errorResponse(res, errorMessage);
+  }
+};
+
+export const getProductById = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { id } = req.params;
+    const product = await productService.getProductById(id);
+    successResponse(res, 'Product retrieved successfully', 200, product);
+  } catch (error) {
+    const errorMessage = (error as Error).message || 'Something went wrong';
+    errorResponse(res, errorMessage);
   }
 };
 
 export const createProduct = async (req: Request, res: Response): Promise<void> => {
   try {
-    const product = await prisma.products.create({
-      data: req.body,
-    });
-
-    res.status(201).json(product);
+    const product = await productService.createProduct(req.body);
+    successResponse(res, 'Product created successfully', 201, product);
   } catch (error) {
-    res.status(500).json({ message: 'Error creating product' });
+    const errorMessage = (error as Error).message || 'Something went wrong';
+    errorResponse(res, errorMessage);
+  }
+};
+
+export const updateProduct = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { id } = req.params;
+    const dataToSend = {
+      ...req.body,
+      productId: id,
+    };
+    const product = await productService.updateProduct(dataToSend);
+    successResponse(res, 'Product updated successfully', 200, product);
+  } catch (error) {
+    const errorMessage = (error as Error).message || 'Something went wrong';
+    errorResponse(res, errorMessage);
+  }
+};
+
+export const softDeleteProducts = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { ids } = req.body;
+    await productService.softDeleteProducts(ids);
+    successResponse(res, 'Products deleted successfully', 200);
+  } catch (error) {
+    const errorMessage = (error as Error).message || 'Something went wrong';
+    errorResponse(res, errorMessage);
+  }
+};
+
+export const restoreProducts = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { ids } = req.body;
+    await productService.restoreProducts(ids);
+    successResponse(res, 'Products restored successfully', 200);
+  } catch (error) {
+    const errorMessage = (error as Error).message || 'Something went wrong';
+    errorResponse(res, errorMessage);
+  }
+};
+
+export const forceDeleteProducts = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { ids } = req.body;
+    await productService.forceDeleteProducts(ids);
+    successResponse(res, 'Products deleted successfully', 200);
+  } catch (error) {
+    const errorMessage = (error as Error).message || 'Something went wrong';
+    errorResponse(res, errorMessage);
   }
 };

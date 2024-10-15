@@ -9,7 +9,7 @@ build/
 out/
 
 # Logs
-logs
+logs/
 *.log
 npm-debug.log*
 yarn-debug.log*
@@ -18,6 +18,8 @@ yarn-error.log*
 # Environment variables
 .env
 .env.local
+.env.staging
+.env.production
 .env.*.local
 
 # IDE files
@@ -33,9 +35,28 @@ yarn-error.log*
 Thumbs.db
 ehthumbs.db
 
-# Coverage directory used by tools like istanbul
+# Coverage directory used by testing tools like istanbul
 coverage/
 
 # Temporary files
 temp/
 tmp/
+*.tmp
+*.temp
+
+# TypeScript cache (from ts-node)
+*.tsbuildinfo
+
+# Prisma
+prisma/migrations/    # Migrations during development
+prisma/dev.db         # SQLite database for local development
+prisma/.env           # Environment variables for Prisma (if used)
+
+# Production directories (generated when running "prisma generate")
+generated/
+
+# Jest testing output (if using Jest)
+jest/
+jest-cache/
+jest.config.js
+coverage/

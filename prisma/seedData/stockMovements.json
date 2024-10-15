@@ -4,6 +4,7 @@
     "productId": "123e4567-e89b-12d3-a456-426614174000",
     "warehouseId": "a86c58b9-b9ff-4c68-88a8-f0e6e1b1742a",
     "movementType": "IN",
+    "movementReason": "out of stock",
     "quantity": 50,
     "transactionDate": "2024-10-01T12:34:56Z"
   },
@@ -12,6 +13,7 @@
     "productId": "123e4567-e89b-12d3-a456-426614174001",
     "warehouseId": "a86c58b9-b9ff-4c68-88a8-f0e6e1b1742a",
     "movementType": "OUT",
+    "movementReason": "low stock",
     "quantity": 20,
     "transactionDate": "2024-10-02T09:12:34Z"
   },
@@ -20,23 +22,8 @@
     "productId": "123e4567-e89b-12d3-a456-426614174002",
     "warehouseId": "b72c47a1-3e65-4c6b-84a8-cbfcf673b39e",
     "movementType": "IN",
+    "movementReason": "out of stock",
     "quantity": 100,
     "transactionDate": "2024-10-03T08:30:21Z"
-  },
-  {
-    "stockMovementId": "111e4567-e89b-12d3-a456-426614174003",
-    "productId": "123e4567-e89b-12d3-a456-426614174003",
-    "warehouseId": "b72c47a1-3e65-4c6b-84a8-cbfcf673b39e",
-    "movementType": "IN",
-    "quantity": 60,
-    "transactionDate": "2024-10-03T10:45:12Z"
-  },
-  {
-    "stockMovementId": "111e4567-e89b-12d3-a456-426614174004",
-    "productId": "123e4567-e89b-12d3-a456-426614174004",
-    "warehouseId": "c6e7f4e1-5f70-4b7c-9c9d-2b9b9b9b9b9b",
-    "movementType": "OUT",
-    "quantity": 30,
-    "transactionDate": "2024-10-04T15:20:00Z"
   }
 ]

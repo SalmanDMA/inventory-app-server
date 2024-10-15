@@ -1,9 +1,9 @@
 import express from 'express';
-import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
+import './configs/env';
 
 import { requestLogger, errorLogger } from './middlewares/logger';
 import errorHandler from './middlewares/errorHandler';
@@ -12,7 +12,6 @@ import errorHandler from './middlewares/errorHandler';
 import apiRouter from './routes';
 
 // Configurations
-dotenv.config();
 const app = express();
 app.use(requestLogger);
 

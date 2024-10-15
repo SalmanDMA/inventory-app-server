@@ -2,26 +2,41 @@
   {
     "supplierId": "efgh5678-e123-4567-b89c-d1ef23456gh8",
     "name": "Supplier 1",
-    "contact": "contact1@example.com"
+    "email": "supplier1@example.com",
+    "phone": "+1-202-555-0147",
+    "address": "123 First Ave, City A",
+    "country": "USA"
   },
   {
     "supplierId": "ijkl6789-e123-4567-b89c-d1ef23456gh0",
     "name": "Supplier 2",
-    "contact": "contact2@example.com"
+    "email": "supplier2@example.com",
+    "phone": "+44-20-7946-0851",
+    "address": "456 Second St, City B",
+    "country": "UK"
   },
   {
     "supplierId": "mnop7890-e123-4567-b89c-d1ef23456gh2",
     "name": "Supplier 3",
-    "contact": "contact3@example.com"
+    "email": "supplier3@example.com",
+    "phone": "+49-30-12345678",
+    "address": "789 Third Rd, City C",
+    "country": "Germany"
   },
   {
     "supplierId": "qrst8901-e123-4567-b89c-d1ef23456gh4",
     "name": "Supplier 4",
-    "contact": "contact4@example.com"
+    "email": "supplier4@example.com",
+    "phone": "+81-3-1234-5678",
+    "address": "101 Fourth Ln, City D",
+    "country": "Japan"
   },
   {
     "supplierId": "uvwx9012-e123-4567-b89c-d1ef23456gh6",
     "name": "Supplier 5",
-    "contact": "contact5@example.com"
+    "email": "supplier5@example.com",
+    "phone": "+91-11-23456789",
+    "address": "202 Fifth Blvd, City E",
+    "country": "India"
   }
 ]

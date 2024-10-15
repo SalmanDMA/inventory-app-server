@@ -1,3 +1,4 @@
+import NotFoundError from '../exeptions/NotFoundError';
 import { UploadRepository } from '../repositories/upload';
 
 const uploadRepository = new UploadRepository();
@@ -7,7 +8,7 @@ export class FileService {
     const file = await uploadRepository.getUploadById(id);
 
     if (!file) {
-      throw new Error('File not found');
+      throw new NotFoundError('File not found');
     }
 
     return file.path;

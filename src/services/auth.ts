@@ -11,8 +11,8 @@ const userService = new UserService();
 const handleSignIn = async (identifier: string, password: string) => {
   const user = await userService.getUserByEmailOrUsername(identifier);
 
-  if (!user) {
-    throw new NotFoundError('User not found, please register first');
+  if (!user || !user.password) {
+    throw new NotFoundError('User not found or password missing, please register first');
   }
 
   const isPasswordMatch = await bcrypt.compare(password, user.password);
@@ -41,6 +41,10 @@ const handleSignIn = async (identifier: string, password: string) => {
 
 const handleChangePassword = async (userId: string, oldPassword: string, newPassword: string) => {
   const user = await userService.getUserById(userId);
+
+  if (!user || !user.password) {
+    throw new NotFoundError('User not found or password missing, please register first');
+  }
 
   const isOldPasswordMatch = await bcrypt.compare(oldPassword, user.password);
 

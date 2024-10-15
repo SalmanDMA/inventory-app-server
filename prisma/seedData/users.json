@@ -4,7 +4,7 @@
     "name": "Carly",
     "username": "cvasyaev0",
     "email": "cvansalzberger0@cisco.com",
-    "password": "$2a$10$HcTXNaIkhEzyuPrLLdNWKe9oRonWNd0os8ZK7iJjpdB5iV.tdYn8u",
+    "password": "$2a$12$jL2UVZb6gg45NTVQo8nENejT98IxZ4ETqZjiPJPCvP4by5aIRLjmG",
     "phone": "555-555-5555",
     "address": "123 Main Street",
     "roleId": "2a730a8e-5ba3-43bb-b387-928b766976c0"
@@ -14,7 +14,7 @@
     "name": "Inesita",
     "username": "imcconnachie1",
     "email": "imcconnachie1@oaic.gov.au",
-    "password": "$2a$10$HcTXNaIkhEzyuPrLLdNWKe9oRonWNd0os8ZK7iJjpdB5iV.tdYn8u",
+    "password": "$2a$12$jL2UVZb6gg45NTVQo8nENejT98IxZ4ETqZjiPJPCvP4by5aIRLjmG",
     "phone": "555-555-5555",
     "address": "123 Main Street",
     "roleId": "4a3bd79b-469a-4e3e-b1be-52f7ce9ae685"
@@ -24,7 +24,7 @@
     "name": "Tulley",
     "username": "tbridywater2",
     "email": "tbridywater2@wikimedia.org",
-    "password": "$2a$10$HcTXNaIkhEzyuPrLLdNWKe9oRonWNd0os8ZK7iJjpdB5iV.tdYn8u",
+    "password": "$2a$12$jL2UVZb6gg45NTVQo8nENejT98IxZ4ETqZjiPJPCvP4by5aIRLjmG",
     "phone": "555-555-5555",
     "address": "123 Main Street",
     "roleId": "a4591567-0f2d-446e-b5f2-cfdfba08078b"
@@ -34,7 +34,7 @@
     "name": "Amelia",
     "username": "atondeur3",
     "email": "atondeur3@posterous.com",
-    "password": "$2a$10$HcTXNaIkhEzyuPrLLdNWKe9oRonWNd0os8ZK7iJjpdB5iV.tdYn8u",
+    "password": "$2a$12$jL2UVZb6gg45NTVQo8nENejT98IxZ4ETqZjiPJPCvP4by5aIRLjmG",
     "phone": "555-555-5555",
     "address": "123 Main Street",
     "roleId": "e838885c-2491-4922-ac44-7a2a3c9e3304"
@@ -44,9 +44,19 @@
     "name": "Customer",
     "username": "customer",
     "email": "customer@customer",
-    "password": "$2a$10$HcTXNaIkhEzyuPrLLdNWKe9oRonWNd0os8ZK7iJjpdB5iV.tdYn8u",
+    "password": "$2a$12$jL2UVZb6gg45NTVQo8nENejT98IxZ4ETqZjiPJPCvP4by5aIRLjmG",
     "phone": "555-555-5555",
     "address": "123 Main Street",
     "roleId": "a0a5b7e9-5a2f-43a9-9d9d-vb0b9b9b9b9b"
+  },
+  {
+    "userId": "a0a5b7e9-5a2f-43a9-9d9d-123b9b9b9b9b",
+    "name": "Manager",
+    "username": "manager",
+    "email": "manager@manager",
+    "password": "$2a$12$jL2UVZb6gg45NTVQo8nENejT98IxZ4ETqZjiPJPCvP4by5aIRLjmG",
+    "phone": "555-555-5555",
+    "address": "123 Main Street",
+    "roleId": "a0a5b7e9-5a2f-43c9-9d9d-6b0b9b9b9b9b"
   }
 ]
