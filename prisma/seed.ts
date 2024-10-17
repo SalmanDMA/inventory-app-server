@@ -32,8 +32,10 @@ async function main() {
     'roles.json',
     'roleModules.json',
     'users.json',
+    'customers.json',
     'warehouses.json',
     'products.json',
+    'productHistories.json',
     'stockMovements.json',
     'purchases.json',
     'purchaseDetails.json',
@@ -63,23 +65,6 @@ async function main() {
             role: {
               connect: {
                 roleId: roleId,
-              },
-            },
-          },
-        });
-      } else if (modelName === 'sales') {
-        const { warehouseId, userId, ...saleData } = data;
-        await model.create({
-          data: {
-            ...saleData,
-            warehouse: {
-              connect: {
-                warehouseId: warehouseId,
-              },
-            },
-            user: {
-              connect: {
-                userId: userId,
               },
             },
           },

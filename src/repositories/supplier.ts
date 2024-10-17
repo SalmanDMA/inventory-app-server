@@ -9,6 +9,7 @@ export class SupplierRepository {
       include: {
         products: true,
         purchases: true,
+        image: true,
       },
     });
     return suppliers as ISupplier[];
@@ -22,13 +23,14 @@ export class SupplierRepository {
       include: {
         products: true,
         purchases: true,
+        image: true,
       },
     });
     return supplier as ISupplier;
   }
 
   async createSupplier(supplier: ISupplier): Promise<ISupplier> {
-    const { products, purchases, ...supplierData } = supplier;
+    const { products, purchases, image, ...supplierData } = supplier;
     const createdSupplier = await prisma.suppliers.create({
       data: {
         ...supplierData,
@@ -38,7 +40,7 @@ export class SupplierRepository {
   }
 
   async updateSupplier(supplier: ISupplier): Promise<ISupplier> {
-    const { products, purchases, ...supplierData } = supplier;
+    const { products, purchases, image, ...supplierData } = supplier;
     const updatedSupplier = await prisma.suppliers.update({
       where: {
         supplierId: supplier.supplierId,

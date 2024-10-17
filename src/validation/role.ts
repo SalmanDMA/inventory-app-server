@@ -10,12 +10,6 @@ const validationCreateRole = [
     .withMessage('Name must be a string')
     .isLength({ min: 3 })
     .withMessage('Name must be at least 3 characters long'),
-  body('alias')
-    .notEmpty()
-    .withMessage('Alias needs to be filled')
-    .isString()
-    .withMessage('Alias must be at least 3 characters long'),
-  body('color').notEmpty().withMessage('Color needs to be filled').isString().withMessage('Color must be a string'),
 
   (req: Request, res: Response, next: NextFunction) => {
     const errors = validationResult(req);

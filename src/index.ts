@@ -10,6 +10,7 @@ import errorHandler from './middlewares/errorHandler';
 
 // Route Imports
 import apiRouter from './routes';
+import { apiLimiter } from './configs/limiter';
 
 // Configurations
 const app = express();
@@ -28,7 +29,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // Routes
-app.use('/api/v1', apiRouter);
+app.use('/api/v1', apiLimiter, apiRouter);
 
 app.use(errorLogger);
 app.use(errorHandler);

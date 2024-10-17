@@ -1,6 +1,9 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,289 +14,375 @@ datasource db {
 }
 
 model Uploads {
-  uploadId          String @id @default(uuid())
-  filename          String
-  category          String // ini category lebih kepada untuk table mana peruntukan nya
-  path              String
-  type              String
-  mime              String
-  extension         String
-  size              Int
-  filenameOrigin    String
+  uploadId       String @id @default(uuid())
+  filename       String
+  category       String // ini category lebih kepada untuk table mana peruntukan nya
+  path           String
+  type           String
+  mime           String
+  extension      String
+  size           Int
+  filenameOrigin String
 
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime @updatedAt
-  deletedAt         DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
 
-  user              Users[]
-  product           Products[]
-  brand             Brands[]
+  users    Users[]
+  products Products[]
+  brands   Brands[]
+  customers Customers[]
+  suppliers Suppliers[]
 }
 
 model Users {
-  userId        String    @id @default(uuid())
-  name          String    
-  username      String    @unique
-  email         String    @unique
-  password      String?
-  phone         String?
-  address       String?
-  avatarId      String?
-  roleId        String
-  
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  deletedAt     DateTime?
+  userId   String  @id @default(uuid())
+  name     String
+  username String  @unique
+  email    String  @unique
+  password String?
+  phone    String?
+  address  String?
+  avatarId String?
+  roleId   String
 
-  avatar        Uploads?  @relation(fields: [avatarId], references: [uploadId])
-  role          Roles     @relation(fields: [roleId], references: [roleId])
-  sales         Sales[]
-  warehouses     Warehouses[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  avatar     Uploads?     @relation(fields: [avatarId], references: [uploadId], onDelete: Cascade)
+  role       Roles        @relation(fields: [roleId], references: [roleId])
+  warehouses Warehouses[]
+  productHistories ProductHistories[]
+
+  @@index([avatarId])
 }
 
-
 model Roles {
-  roleId              String     @id @default(uuid())
-  name                String     @unique
-  alias               String
-  color               String
-  description         String?
-  users               Users[]   
-  roleModules         RoleModules[] 
+  roleId      String        @id @default(uuid())
+  name        String        @unique
+  alias       String?
+  color       String?
+  description String?
 
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  deletedAt     DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  users       Users[]
+  roleModules RoleModules[]
 }
 
 model Modules {
-  moduleId            Int       @id @default(autoincrement())
-  moduleTypeId        String
-  parentId            Int?    
-  path                String?
-  name                String     @unique
-  icon                String?
-  route               String?
-  description         String?
-  roleModules         RoleModules[] 
+  moduleId     Int           @id @default(autoincrement())
+  moduleTypeId String
+  parentId     Int?
+  path         String?
+  name         String        @unique
+  icon         String?
+  route        String?
+  description  String?
 
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  deletedAt     DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
 
-  moduleType          ModulesTypes  @relation(fields: [moduleTypeId], references: [moduleTypeId])
-  parentModule        Modules?      @relation("ParentChild", fields: [parentId], references: [moduleId])
-  childModules        Modules[]     @relation("ParentChild")
+  roleModules  RoleModules[]
+  moduleType   ModulesTypes @relation(fields: [moduleTypeId], references: [moduleTypeId])
+  parentModule Modules?     @relation("ParentChild", fields: [parentId], references: [moduleId])
+  childModules Modules[]    @relation("ParentChild")
+
+  @@index([parentId])
 }
 
 model ModulesTypes {
-  moduleTypeId        String     @id @default(uuid())
-  name                String     @unique
-  icon                String?
-  description         String?
-  modules             Modules[]
+  moduleTypeId String    @id @default(uuid())
+  name         String    @unique
+  icon         String?
+  description  String?
 
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  deletedAt     DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  modules      Modules[]
 }
 
 model RoleModules {
-  roleModuleId        String     @id @default(uuid())
-  roleId              String
-  moduleId            Int
-  checked             Boolean
-  role                Roles      @relation(fields: [roleId], references: [roleId])
-  module              Modules    @relation(fields: [moduleId], references: [moduleId])
+  roleModuleId String  @id @default(uuid())
+  roleId       String
+  moduleId     Int
+  checked      Boolean
 
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  deletedAt     DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  role         Roles   @relation(fields: [roleId], references: [roleId])
+  module       Modules @relation(fields: [moduleId], references: [moduleId])
+
+  @@index([roleId, moduleId])
 }
 
 model Products {
-  productId       String         @id @default(uuid())
-  sku             String         @unique
-  discount        Float?
-  costPrice       Float
-  name            String
-  description     String?
-  price           Float
-  rating          Float?
-  stock           Int
-  reorderLevel    Int            // Batas stok minimum sebelum harus reorder
-  categoryId      Int
-  brandId         String
-  supplierId      String
-  imageId         String?
-  height          Float?
-  width           Float?
-  weight          Float?
+  productId    String  @id @default(uuid())
+  sku          String  @unique
+  discount     Float?
+  costPrice    Float
+  name         String
+  description  String?
+  price        Float
+  rating       Float?
+  stock        Int
+  reorderLevel Int // Batas stok minimum sebelum harus reorder
+  categoryId   Int
+  brandId      String
+  supplierId   String
+  imageId      String?
+  height       Float?
+  width        Float?
+  weight       Float?
 
-  createdAt       DateTime       @default(now())
-  updatedAt       DateTime       @updatedAt
-  deletedAt       DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
 
-  image           Uploads?       @relation(fields: [imageId], references: [uploadId])
-  category        Categories     @relation(fields: [categoryId], references: [categoryId])
-  brand           Brands         @relation(fields: [brandId], references: [brandId])
-  supplier        Suppliers?     @relation(fields: [supplierId], references: [supplierId])
+  image           Uploads?          @relation(fields: [imageId], references: [uploadId], onDelete: Cascade)
+  category        Categories        @relation(fields: [categoryId], references: [categoryId])
+  brand           Brands            @relation(fields: [brandId], references: [brandId])
+  supplier        Suppliers?        @relation(fields: [supplierId], references: [supplierId])
   stockMovements  StockMovements[]
   purchaseDetails PurchaseDetails[]
   salesDetails    SalesDetails[]
+  productHistories  ProductHistories[]
+
+  @@index([imageId, categoryId, brandId, supplierId])
+}
+
+model ProductHistories {
+  productHistoryId   String  @id @default(uuid())
+  productId   String
+  oldPrice    Float
+  newPrice    Float
+  userId      String   // User who changed the price
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  deletedAt   DateTime?
+
+  product Products @relation(fields: [productId], references: [productId])
+  user    Users    @relation(fields: [userId], references: [userId])
+
+  @@index([productId])
+  @@index([userId])
 }
 
 model Categories {
-  categoryId          Int      @id @default(autoincrement())
-  parentId            Int?    
-  path                String?
-  name                String     @unique
-  alias               String
-  description         String?
-  
-  createdAt           DateTime    @default(now())
-  updatedAt           DateTime    @updatedAt
-  deletedAt           DateTime?
-  
-  products            Products[]
-  parentCategory        Categories?      @relation("ParentChild", fields: [parentId], references: [categoryId])
-  childCategories        Categories[]     @relation("ParentChild")
+  categoryId  Int     @id @default(autoincrement())
+  parentId    Int?
+  path        String?
+  name        String  @unique
+  alias       String?
+  color       String?
+  description String?
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  products        Products[]
+  parentCategory  Categories?  @relation("ParentChild", fields: [parentId], references: [categoryId])
+  childCategories Categories[] @relation("ParentChild")
+
+  @@index([parentId])
 }
 
 model Brands {
-  brandId       String      @id @default(uuid())
-  name          String
-  description   String?
-  imageId       String?
-  alias         String?
+  brandId     String  @id @default(uuid())
+  name        String
+  description String?
+  imageId     String?
+  alias       String?
+  color       String?
 
-  createdAt     DateTime    @default(now())
-  updatedAt     DateTime    @updatedAt
-  deletedAt     DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
 
-  products      Products[]
-  image         Uploads?    @relation(fields: [imageId], references: [uploadId])
+  products Products[]
+  image    Uploads?   @relation(fields: [imageId], references: [uploadId], onDelete: Cascade)
+
+  @@index([imageId])
+}
+
+model Customers {
+  customerId       String     @id @default(uuid())
+  name             String
+  email            String
+  phone            String
+  address          String?
+  companyName      String?
+  taxNumber        String?    // NPWP atau nomor pajak
+  contractStartDate DateTime?
+  contractEndDate  DateTime?
+  paymentTerms     String?    // Syarat pembayaran
+  creditLimit      Float?     // Batas kredit
+  discount         Float?     // Diskon khusus
+  imageId          String?
+ 
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+  
+  sales            Sales[]
+  image    Uploads?   @relation(fields: [imageId], references: [uploadId], onDelete: Cascade)
+
+  @@index([imageId]) 
 }
 
 model Suppliers {
-  supplierId String      @id @default(uuid())
-  name        String
-  email       String
-  phone       String
-  address     String
-  country     String?
+  supplierId        String     @id @default(uuid())
+  companyName       String
+  name              String     // Nama kontak di perusahaan
+  email             String
+  phone             String
+  address           String?
+  taxNumber         String?    // NPWP atau nomor pajak
+  bankAccount       String?    // Informasi rekening bank
+  contractStartDate DateTime?
+  contractEndDate   DateTime?
+  paymentTerms      String?    // Syarat pembayaran
+  deliveryLeadTime  Int?       // Waktu rata-rata pengiriman dalam hari
+  rating            Float?     // Penilaian terhadap pemasok
+  imageId           String?
+  
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
 
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
-  deletedAt   DateTime?
+  purchases         Purchases[]
+  products          Products[]
+  image    Uploads?   @relation(fields: [imageId], references: [uploadId], onDelete: Cascade)
 
-  products    Products[]
-  purchases   Purchases[]
+  @@index([imageId])
 }
 
 model StockMovements {
-  stockMovementId      String      @id @default(uuid())
-  productId            String      
-  warehouseId          String
-  movementType         MovementType // 'IN' for incoming, 'OUT' for outgoing
-  movementReason       String?
-  quantity             Int
-  transactionDate      DateTime
+  stockMovementId String       @id @default(uuid())
+  productId       String
+  warehouseId     String
+  movementType    MovementType // 'IN' for incoming, 'OUT' for outgoing
+  movementReason  String?
+  quantity        Int
+  transactionDate DateTime
 
-  createdAt            DateTime     @default(now())
-  updatedAt            DateTime     @updatedAt
-  deletedAt            DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
 
-  product           Products     @relation(fields: [productId], references: [productId])
-  warehouse         Warehouses   @relation(fields: [warehouseId], references: [warehouseId])
+  product   Products   @relation(fields: [productId], references: [productId])
+  warehouse Warehouses @relation(fields: [warehouseId], references: [warehouseId])
+
+  @@index([productId, warehouseId])
 }
 
 model Purchases {
-  purchaseId          String      @id @default(uuid())
-  supplierId          String
-  warehouseId         String
-  total               Float
-  paymentStatus       PaymentStatus  
-  paymentMethod       PaymentMethod  
+  purchaseId    String        @id @default(uuid())
+  supplierId    String
+  warehouseId   String
+  status       OrderStatus @default(PENDING)
+  total         Float
+  paymentStatus PaymentStatus
+  paymentMethod PaymentMethod
 
-  createdAt           DateTime @default(now())
-  updatedAt           DateTime @updatedAt
-  deletedAt           DateTime?
-  
-  supplier            Suppliers  @relation(fields: [supplierId], references: [supplierId])
-  warehouse           Warehouses @relation(fields: [warehouseId], references: [warehouseId])
-  details             PurchaseDetails[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  supplier  Suppliers         @relation(fields: [supplierId], references: [supplierId])
+  warehouse Warehouses        @relation(fields: [warehouseId], references: [warehouseId])
+  details   PurchaseDetails[]
+
+  @@index([supplierId, warehouseId])
 }
 
 model PurchaseDetails {
-  purchaseDetailId        String    @id @default(uuid())
-  purchaseId              String
-  productId               String
-  quantity                Int
-  price                   Float
-  discount                Float?
-  tax                     Float?
+  purchaseDetailId String @id @default(uuid())
+  purchaseId       String
+  productId        String
+  quantity         Int
+  price            Float
+  discount         Float?
+  tax              Float?
 
-  createdAt               DateTime  @default(now())
-  updatedAt               DateTime  @updatedAt
-  deletedAt               DateTime?
-  
-  purchase                Purchases @relation(fields: [purchaseId], references: [purchaseId])
-  product                 Products  @relation(fields: [productId], references: [productId])
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  purchase Purchases @relation(fields: [purchaseId], references: [purchaseId])
+  product  Products  @relation(fields: [productId], references: [productId])
+
+  @@index([purchaseId, productId])
 }
 
 model Sales {
-  saleId              String      @id @default(uuid())
-  userId              String     
-  warehouseId         String
-  total               Float
-  paymentStatus       PaymentStatus  
-  paymentMethod       PaymentMethod
+  saleId        String        @id @default(uuid())
+  customerId        String
+  warehouseId   String
+  status       OrderStatus @default(PENDING)
+  total         Float
+  paymentStatus PaymentStatus
+  paymentMethod PaymentMethod
 
-  createdAt           DateTime @default(now())
-  updatedAt           DateTime @updatedAt
-  deletedAt           DateTime?
-  
-  warehouse           Warehouses @relation(fields: [warehouseId], references: [warehouseId])
-  user                Users      @relation(fields: [userId], references: [userId]) 
-  details             SalesDetails[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  warehouse Warehouses     @relation(fields: [warehouseId], references: [warehouseId])
+  customer      Customers          @relation(fields: [customerId], references: [customerId])
+  details   SalesDetails[]
+
+  @@index([customerId, warehouseId])
 }
 
 model SalesDetails {
-  salesDetailId           String    @id @default(uuid())
-  saleId                  String
-  productId               String
-  quantity                Int
-  price                   Float
-  discount                Float?
-  tax                     Float?
+  salesDetailId String @id @default(uuid())
+  saleId        String
+  productId     String
+  quantity      Int
+  price         Float
+  discount      Float?
+  tax           Float?
 
-  createdAt               DateTime   @default(now())
-  updatedAt               DateTime   @updatedAt
-  deletedAt               DateTime?
-  
-  sale                    Sales      @relation(fields: [saleId], references: [saleId])
-  product                 Products   @relation(fields: [productId], references: [productId])
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  sale    Sales    @relation(fields: [saleId], references: [saleId])
+  product Products @relation(fields: [productId], references: [productId])
+
+  @@index([saleId, productId])
 }
 
 model Warehouses {
-  warehouseId    String     @id @default(uuid())
-  name           String
-  location       String
-  capacity       Int
-  description    String?
-  picId          String
-  status         WarehouseStatus?
+  warehouseId String           @id @default(uuid())
+  name        String
+  location    String
+  capacity    Int
+  description String?
+  picId       String
+  status      WarehouseStatus?
 
-  products       StockMovements[]
-  sales          Sales[]
-  purchases      Purchases[]
-  pic            Users      @relation(fields: [picId], references: [userId])
-  
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
 
-  createdAt      DateTime   @default(now())
-  updatedAt      DateTime   @updatedAt
-  deletedAt      DateTime?
+  products  StockMovements[]
+  sales     Sales[]
+  purchases Purchases[]
+  pic       Users            @relation(fields: [picId], references: [userId])
+
+  @@index([picId])
 }
 
 enum MovementType {
@@ -316,4 +405,12 @@ enum PaymentMethod {
 enum WarehouseStatus {
   AVAILABLE
   FULL
+}
+
+enum OrderStatus {
+  PENDING
+  PROCESSED
+  SHIPPED
+  DELIVERED
+  CANCELLED
 }

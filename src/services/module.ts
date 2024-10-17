@@ -3,8 +3,10 @@ import NotFoundError from '../exeptions/NotFoundError';
 import { RoleModuleRepository } from '../repositories/roleModule';
 import { ModuleRepository } from '../repositories/module';
 import { IModule } from '../types/model';
+import { ModuleTypeRepository } from '../repositories/moduleType';
 
 const roleModuleRepository = new RoleModuleRepository();
+const moduleTypeRespository = new ModuleTypeRepository();
 const moduleRepository = new ModuleRepository();
 
 export class ModuleService {
@@ -37,7 +39,6 @@ export class ModuleService {
     }
 
     let path = moduleData.path;
-
     if (module.parentId && module.parentId !== moduleData.parentId) {
       const parentModule = await moduleRepository.getModuleById(module.parentId);
       if (parentModule) {
@@ -49,13 +50,13 @@ export class ModuleService {
       path = `/${module.moduleId}`;
     }
 
-    const parseParentId =
-      typeof module.parentId === 'number'
-        ? module.parentId
-        : module.parentId
-        ? parseInt(module.parentId as unknown as string, 10)
-        : null;
+    const moduleType = await moduleTypeRespository.getModuleTypeById(module.moduleTypeId);
+    if (moduleType?.name === 'Menu Directory') {
+      module.parentId = null;
+      path = `/${module.moduleId}`;
+    }
 
+    const parseParentId = typeof module.parentId === 'number' ? module.parentId : null;
     const parseModuleId =
       typeof module.moduleId === 'number' ? module.moduleId : parseInt(module.moduleId as unknown as string, 10);
 
@@ -68,7 +69,6 @@ export class ModuleService {
     };
 
     const updatedModule = await moduleRepository.update(updatedModuleData);
-
     return updatedModule;
   }
 
@@ -80,12 +80,12 @@ export class ModuleService {
       }
     }
 
-    const parseParentId =
-      typeof module.parentId === 'number'
-        ? module.parentId
-        : module.parentId
-        ? parseInt(module.parentId as unknown as string, 10)
-        : null;
+    const moduleType = await moduleTypeRespository.getModuleTypeById(module.moduleTypeId);
+    if (moduleType?.name === 'Menu Directory') {
+      module.parentId = null;
+    }
+
+    const parseParentId = typeof module.parentId === 'number' ? module.parentId : null;
 
     const createdModule = await moduleRepository.create({
       ...module,
@@ -93,11 +93,10 @@ export class ModuleService {
     });
 
     let path = `/${createdModule.moduleId}`;
-
     if (createdModule.parentId) {
       const parentModule = await moduleRepository.getModuleById(createdModule.parentId);
       if (parentModule) {
-        path = `${parentModule.path}/${createdModule.moduleId}`;
+        path = `${parentModule.path}/${createdModule.moduleId}`.replace(/\/+/g, '/');
       }
     }
 

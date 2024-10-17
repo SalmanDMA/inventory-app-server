@@ -3,6 +3,11 @@ import { body, validationResult } from 'express-validator';
 import InvariantError from '../exeptions/InvariantError';
 
 const validationCreateSupplier = [
+  body('companyName')
+    .notEmpty()
+    .withMessage('Company Name needs to be filled')
+    .isString()
+    .withMessage('Company Name must be a string'),
   body('name')
     .notEmpty()
     .withMessage('Name needs to be filled')
@@ -24,13 +29,6 @@ const validationCreateSupplier = [
     .withMessage('Phone must be a string')
     .isLength({ min: 3 })
     .withMessage('Phone must be at least 3 characters long'),
-  body('address')
-    .notEmpty()
-    .withMessage('Address needs to be filled')
-    .isString()
-    .withMessage('Address must be a string')
-    .isLength({ min: 3 })
-    .withMessage('Address must be at least 3 characters long'),
 
   (req: Request, res: Response, next: NextFunction) => {
     const errors = validationResult(req);
@@ -42,6 +40,7 @@ const validationCreateSupplier = [
 ];
 
 const validationUpdateSupplier = [
+  body('companyName').optional().isString().withMessage('Company Name must be a string'),
   body('name')
     .optional()
     .isString()
@@ -60,12 +59,6 @@ const validationUpdateSupplier = [
     .withMessage('Phone must be a string')
     .isLength({ min: 3 })
     .withMessage('Phone must be at least 3 characters long'),
-  body('address')
-    .optional()
-    .isString()
-    .withMessage('Address must be a string')
-    .isLength({ min: 3 })
-    .withMessage('Address must be at least 3 characters long'),
 
   (req: Request, res: Response, next: NextFunction) => {
     const errors = validationResult(req);

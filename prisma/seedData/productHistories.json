@@ -1,0 +1,32 @@
+[
+  {
+    "productHistoryId": "abcd1234-efgh-5678-ijkl-1234567890ab",
+    "productId": "123e4567-e89b-12d3-a456-426614174000",
+    "oldPrice": 1500.0,
+    "newPrice": 99.99,
+    "userId": "3b0fd66b-a4d6-4d95-94e4-01940c99aedb",
+    "createdAt": "2024-01-15T10:00:00Z",
+    "updatedAt": "2024-01-15T10:00:00Z",
+    "deletedAt": null
+  },
+  {
+    "productHistoryId": "abcd5678-efgh-5678-ijkl-1234567890cd",
+    "productId": "123e4567-e89b-12d3-a456-426614174001",
+    "oldPrice": 999.99,
+    "newPrice": 199.99,
+    "userId": "3b0fd66b-a4d6-4d95-94e4-01940c99aedb",
+    "createdAt": "2024-02-20T12:00:00Z",
+    "updatedAt": "2024-02-20T12:00:00Z",
+    "deletedAt": null
+  },
+  {
+    "productHistoryId": "abcd9012-efgh-5678-ijkl-1234567890ef",
+    "productId": "123e4567-e89b-12d3-a456-426614174002",
+    "oldPrice": 599.0,
+    "newPrice": 299.99,
+    "userId": "3b0fd66b-a4d6-4d95-94e4-01940c99aedb",
+    "createdAt": "2024-03-30T08:00:00Z",
+    "updatedAt": "2024-03-30T08:00:00Z",
+    "deletedAt": null
+  }
+]

@@ -3,42 +3,42 @@
     "roleId": "2a730a8e-5ba3-43bb-b387-928b766976c0",
     "name": "Admin",
     "alias": "ADM",
-    "color": "#FF5733",
+    "color": "FF5733",
     "description": "Administrator with full access"
   },
   {
     "roleId": "4a3bd79b-469a-4e3e-b1be-52f7ce9ae685",
     "name": "Warehouse",
     "alias": "WH",
-    "color": "#33FF57",
+    "color": "33FF57",
     "description": "Role for managing inventory"
   },
   {
     "roleId": "a4591567-0f2d-446e-b5f2-cfdfba08078b",
     "name": "Accountant",
     "alias": "ACC",
-    "color": "#3357FF",
+    "color": "3357FF",
     "description": "Role for managing finances"
   },
   {
     "roleId": "e838885c-2491-4922-ac44-7a2a3c9e3304",
     "name": "Sales",
     "alias": "SAL",
-    "color": "#FFFF33",
+    "color": "FFFF33",
     "description": "Role for managing sales"
   },
   {
     "roleId": "a0a5b7e9-5a2f-43c9-9d9d-6b0b9b9b9b9b",
     "name": "Manager",
     "alias": "MGR",
-    "color": "#FF33FF",
+    "color": "FF33FF",
     "description": "Role for managing employees"
   },
   {
     "roleId": "a0a5b7e9-5a2f-43a9-9d9d-vb0b9b9b9b9b",
     "name": "Customer",
     "alias": "CUST",
-    "color": "#33FFFF",
+    "color": "33FFFF",
     "description": "Role for customer"
   }
 ]

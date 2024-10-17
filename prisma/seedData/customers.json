@@ -1,0 +1,72 @@
+[
+  {
+    "customerId": "abcd1234-e123-4567-b89c-d1ef23456cd7",
+    "name": "Customer 1",
+    "email": "customer1@example.com",
+    "phone": "+1-202-555-0173",
+    "address": "321 First St, City A, USA",
+    "companyName": "Customer 1 Corp",
+    "taxNumber": "12-3456789",
+    "contractStartDate": "2020-01-01T00:00:00Z",
+    "contractEndDate": "2023-01-01T00:00:00Z",
+    "paymentTerms": "Net 30",
+    "creditLimit": 50000.0,
+    "discount": 5.0
+  },
+  {
+    "customerId": "efgh5678-e123-4567-b89c-d1ef23456ef8",
+    "name": "Customer 2",
+    "email": "customer2@example.com",
+    "phone": "+44-20-7946-0123",
+    "address": "654 Second St, City B, UK",
+    "companyName": "Customer 2 Ltd",
+    "taxNumber": "GB123456789",
+    "contractStartDate": "2021-05-01T00:00:00Z",
+    "contractEndDate": "2024-05-01T00:00:00Z",
+    "paymentTerms": "Net 45",
+    "creditLimit": 75000.0,
+    "discount": 7.5
+  },
+  {
+    "customerId": "ijkl6789-e123-4567-b89c-d1ef23456gh9",
+    "name": "Customer 3",
+    "email": "customer3@example.com",
+    "phone": "+49-30-12345689",
+    "address": "987 Third Rd, City C, Germany",
+    "companyName": "Customer 3 GmbH",
+    "taxNumber": "DE987654321",
+    "contractStartDate": "2022-07-15T00:00:00Z",
+    "contractEndDate": "2026-07-15T00:00:00Z",
+    "paymentTerms": "Net 60",
+    "creditLimit": 100000.0,
+    "discount": 10.0
+  },
+  {
+    "customerId": "mnop7890-e123-4567-b89c-d1ef23456gh1",
+    "name": "Customer 4",
+    "email": "customer4@example.com",
+    "phone": "+81-3-1234-5679",
+    "address": "1010 Fourth Ln, City D, Japan",
+    "companyName": "Customer 4 Co.",
+    "taxNumber": "JP123456789",
+    "contractStartDate": "2023-03-01T00:00:00Z",
+    "contractEndDate": "2028-03-01T00:00:00Z",
+    "paymentTerms": "Net 30",
+    "creditLimit": 60000.0,
+    "discount": 6.0
+  },
+  {
+    "customerId": "qrst9012-e123-4567-b89c-d1ef23456gh3",
+    "name": "Customer 5",
+    "email": "customer5@example.com",
+    "phone": "+91-11-23456790",
+    "address": "2021 Fifth Blvd, City E, India",
+    "companyName": "Customer 5 Pvt Ltd",
+    "taxNumber": "IN987654321",
+    "contractStartDate": "2023-09-01T00:00:00Z",
+    "contractEndDate": "2028-09-01T00:00:00Z",
+    "paymentTerms": "Net 30",
+    "creditLimit": 90000.0,
+    "discount": 9.0
+  }
+]

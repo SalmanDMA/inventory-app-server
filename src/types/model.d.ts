@@ -8,9 +8,16 @@ export interface IUpload {
   extension: string;
   size: number;
   filenameOrigin: string;
+
   createdAt: Date;
   updatedAt: Date;
   deletedAt?: Date | null;
+
+  users?: IUser[];
+  products?: IProduct[];
+  brands?: IBrand[];
+  customers?: ICustomer[];
+  suppliers?: ISupplier[];
 }
 
 export interface IUser {
@@ -28,27 +35,29 @@ export interface IUser {
   updatedAt: Date;
   deletedAt?: Date | null;
 
-  role: IRole;
   avatar?: IUpload;
-  sales: ISale[];
+  role: IRole;
   warehouses: IWarehouse[];
+  productHistories: IProductHistory[];
 }
 
 export interface IRole {
   roleId: string;
   name: string;
-  alias: string;
-  color: string;
-  description: string;
-  users: IUser[];
-  roleModules: IRoleModules[];
+  alias?: string;
+  color?: string;
+  description?: string;
+
   createdAt: Date;
   updatedAt: Date;
   deletedAt: Date | null;
+
+  users: IUser[];
+  roleModules: IRoleModules[];
 }
 
 export interface IModule {
-  moduleId?: number;
+  moduleId: number;
   moduleTypeId: string;
   parentId?: number | null;
   path?: string;
@@ -61,8 +70,8 @@ export interface IModule {
   updatedAt: Date;
   deletedAt?: Date | null;
 
-  moduleType: IModuleType;
   roleModules: IRoleModules[];
+  moduleType: IModuleType;
   parentModule?: IModule | null;
   childModules: IModule[];
 }
@@ -72,10 +81,12 @@ export interface IModuleType {
   name: string;
   icon: string;
   description: string;
-  modules: IModule[];
+
   createdAt: Date;
   updatedAt: Date;
   deletedAt?: Date | null;
+
+  modules: IModule[];
 }
 
 export interface IRoleModules {
@@ -83,11 +94,13 @@ export interface IRoleModules {
   roleId: string;
   moduleId: number;
   checked: boolean;
-  role?: IRole;
-  module?: IModule;
+
   createdAt?: Date;
   updatedAt?: Date;
   deletedAt?: Date | null;
+
+  role?: IRole;
+  module?: IModule;
 }
 
 export interface IProduct {
@@ -96,7 +109,7 @@ export interface IProduct {
   discount?: number;
   costPrice: number;
   name: string;
-  description: string;
+  description?: string;
   price: number;
   rating?: number;
   stock: number;
@@ -120,6 +133,22 @@ export interface IProduct {
   stockMovements?: IStockMovement[];
   purchaseDetails?: IPurchaseDetail[];
   salesDetails?: ISalesDetail[];
+  productHistories?: IProductHistory[];
+}
+
+export interface IProductHistory {
+  productHistoryId: string;
+  productId: string;
+  oldPrice: number;
+  newPrice: number;
+  userId: string;
+
+  createdAt: Date;
+  updatedAt: Date;
+  deletedAt?: Date | null;
+
+  product?: IProduct;
+  user?: IUser;
 }
 
 export interface ICategory {
@@ -128,6 +157,7 @@ export interface ICategory {
   path?: string;
   name: string;
   alias?: string;
+  color?: string;
   description?: string;
 
   createdAt: Date;
@@ -145,6 +175,7 @@ export interface IBrand {
   description?: string;
   imageId?: string;
   alias?: string;
+  color?: string;
 
   createdAt: Date;
   updatedAt: Date;
@@ -154,20 +185,52 @@ export interface IBrand {
   image?: IUpload;
 }
 
-export interface ISupplier {
-  supplierId: string;
+export interface ICustomer {
+  customerId: string;
   name: string;
   email: string;
   phone: string;
   address: string;
-  country: string;
+  companyName?: string;
+  taxNumber?: string;
+  contractStartDate?: Date;
+  contractEndDate?: Date;
+  paymentTerm?: string;
+  creditLimit?: number;
+  discount?: number;
+  imageId?: string;
 
   createdAt: Date;
   updatedAt: Date;
   deletedAt?: Date | null;
 
-  products?: IProduct[];
+  sales?: ISale[];
+  image?: IUpload;
+}
+
+export interface ISupplier {
+  supplierId: string;
+  companyName: string;
+  name: string;
+  email: string;
+  phone: string;
+  address?: string;
+  taxNumber?: string;
+  bankAccount?: string;
+  contractStartDate?: Date;
+  contractEndDate?: Date;
+  paymentTerm?: string;
+  deliveryLeadTime?: number;
+  rating?: number;
+  imageId: string;
+
+  createdAt: Date;
+  updatedAt: Date;
+  deletedAt?: Date | null;
+
   purchases?: IPurchase[];
+  products?: IProduct[];
+  image?: IUpload;
 }
 
 export interface IStockMovement {
@@ -191,6 +254,7 @@ export interface IPurchase {
   purchaseId: string;
   supplierId: string;
   warehouseId: string;
+  status: 'PENDING' | 'PROCESSED' | 'SHIPPED' | 'DELIVERED' | 'CANCELLED';
   total: number;
   paymentStatus: 'PAID' | 'UNPAID' | 'CANCELLED' | 'OVERDUE';
   paymentMethod: 'CASH' | 'CREDITCARD';
@@ -223,8 +287,9 @@ export interface IPurchaseDetail {
 
 export interface ISale {
   saleId: string;
-  userId: string;
+  customerId: string;
   warehouseId: string;
+  status: 'PENDING' | 'PROCESSED' | 'SHIPPED' | 'DELIVERED' | 'CANCELLED';
   total: number;
   paymentStatus: 'PAID' | 'UNPAID' | 'CANCELLED' | 'OVERDUE';
   paymentMethod: 'CASH' | 'CREDITCARD';
@@ -234,7 +299,7 @@ export interface ISale {
   deletedAt?: Date | null;
 
   warehouse?: IWarehouse;
-  user?: IUser;
+  customer?: ICustomer;
   details?: ISalesDetail[];
 }
 
@@ -269,7 +334,7 @@ export interface IWarehouse {
   deletedAt?: Date | null;
 
   products?: IStockMovement[];
-  pic: IUser;
   sales?: ISale[];
   purchases?: IPurchase[];
+  pic: IUser;
 }

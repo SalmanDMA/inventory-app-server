@@ -11,6 +11,10 @@ export class ProductRepository {
         category: true,
         supplier: true,
         image: true,
+        productHistories: true,
+        purchaseDetails: true,
+        salesDetails: true,
+        stockMovements: true,
       },
     });
     return products as IProduct[];
@@ -26,13 +30,27 @@ export class ProductRepository {
         category: true,
         supplier: true,
         image: true,
+        productHistories: true,
+        purchaseDetails: true,
+        salesDetails: true,
+        stockMovements: true,
       },
     });
     return product as IProduct;
   }
 
   async createProduct(product: IProduct): Promise<IProduct> {
-    const { brand, category, supplier, image, purchaseDetails, salesDetails, stockMovements, ...productData } = product;
+    const {
+      brand,
+      category,
+      supplier,
+      image,
+      purchaseDetails,
+      salesDetails,
+      stockMovements,
+      productHistories,
+      ...productData
+    } = product;
     const createdProduct = await prisma.products.create({
       data: {
         ...productData,
@@ -42,7 +60,17 @@ export class ProductRepository {
   }
 
   async updateProduct(product: IProduct): Promise<IProduct> {
-    const { brand, category, supplier, image, purchaseDetails, salesDetails, stockMovements, ...productData } = product;
+    const {
+      brand,
+      category,
+      supplier,
+      image,
+      purchaseDetails,
+      salesDetails,
+      stockMovements,
+      productHistories,
+      ...productData
+    } = product;
     const updatedProduct = await prisma.products.update({
       where: {
         productId: product.productId,

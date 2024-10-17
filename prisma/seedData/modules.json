@@ -92,11 +92,11 @@
   {
     "moduleId": 10,
     "moduleTypeId": "c2dfc5bc-e84c-490c-89a9-9dd3c5e4f18f",
-    "parentId": 6,
-    "path": "/6/10/",
+    "parentId": null,
+    "path": "/10/",
     "name": "Supplier",
-    "icon": "Cable",
-    "route": "/dashboard/products/suppliers",
+    "icon": "BookUser",
+    "route": "/dashboard/suppliers",
     "description": "Module for product supplier"
   },
   {

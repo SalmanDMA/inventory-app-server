@@ -1,42 +1,77 @@
 [
   {
     "supplierId": "efgh5678-e123-4567-b89c-d1ef23456gh8",
-    "name": "Supplier 1",
+    "companyName": "Supplier 1 LLC",
+    "name": "John Doe",
     "email": "supplier1@example.com",
     "phone": "+1-202-555-0147",
-    "address": "123 First Ave, City A",
-    "country": "USA"
+    "address": "123 First Ave, City A, USA",
+    "taxNumber": "12-3456789",
+    "bankAccount": "1234567890",
+    "contractStartDate": "2021-01-01T00:00:00Z",
+    "contractEndDate": "2025-01-01T00:00:00Z",
+    "paymentTerms": "Net 30",
+    "deliveryLeadTime": 7,
+    "rating": 4.5
   },
   {
     "supplierId": "ijkl6789-e123-4567-b89c-d1ef23456gh0",
-    "name": "Supplier 2",
+    "companyName": "Supplier 2 Ltd",
+    "name": "Jane Smith",
     "email": "supplier2@example.com",
     "phone": "+44-20-7946-0851",
-    "address": "456 Second St, City B",
-    "country": "UK"
+    "address": "456 Second St, City B, UK",
+    "taxNumber": "GB123456789",
+    "bankAccount": "0987654321",
+    "contractStartDate": "2020-05-01T00:00:00Z",
+    "contractEndDate": "2024-05-01T00:00:00Z",
+    "paymentTerms": "Net 45",
+    "deliveryLeadTime": 14,
+    "rating": 4.7
   },
   {
     "supplierId": "mnop7890-e123-4567-b89c-d1ef23456gh2",
-    "name": "Supplier 3",
+    "companyName": "Supplier 3 GmbH",
+    "name": "Hans Müller",
     "email": "supplier3@example.com",
     "phone": "+49-30-12345678",
-    "address": "789 Third Rd, City C",
-    "country": "Germany"
+    "address": "789 Third Rd, City C, Germany",
+    "taxNumber": "DE987654321",
+    "bankAccount": "1122334455",
+    "contractStartDate": "2022-07-15T00:00:00Z",
+    "contractEndDate": "2026-07-15T00:00:00Z",
+    "paymentTerms": "Net 60",
+    "deliveryLeadTime": 10,
+    "rating": 4.8
   },
   {
     "supplierId": "qrst8901-e123-4567-b89c-d1ef23456gh4",
-    "name": "Supplier 4",
+    "companyName": "Supplier 4 Co.",
+    "name": "Taro Yamada",
     "email": "supplier4@example.com",
     "phone": "+81-3-1234-5678",
-    "address": "101 Fourth Ln, City D",
-    "country": "Japan"
+    "address": "101 Fourth Ln, City D, Japan",
+    "taxNumber": "JP123456789",
+    "bankAccount": "6677889900",
+    "contractStartDate": "2019-03-01T00:00:00Z",
+    "contractEndDate": "2023-03-01T00:00:00Z",
+    "paymentTerms": "Net 30",
+    "deliveryLeadTime": 5,
+    "rating": 4.6
   },
   {
     "supplierId": "uvwx9012-e123-4567-b89c-d1ef23456gh6",
-    "name": "Supplier 5",
+    "companyName": "Supplier 5 Pvt Ltd",
+    "name": "Amit Kumar",
     "email": "supplier5@example.com",
     "phone": "+91-11-23456789",
-    "address": "202 Fifth Blvd, City E",
-    "country": "India"
+    "address": "202 Fifth Blvd, City E, India",
+    "taxNumber": "IN987654321",
+    "bankAccount": "9988776655",
+    "contractStartDate": "2023-09-01T00:00:00Z",
+    "contractEndDate": "2028-09-01T00:00:00Z",
+    "paymentTerms": "Net 30",
+    "deliveryLeadTime": 12,
+    "rating": 4.9
   }
 ]

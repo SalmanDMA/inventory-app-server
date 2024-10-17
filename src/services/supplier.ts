@@ -33,7 +33,7 @@ export class SupplierService {
   }
 
   async createSupplier(supplier: ISupplier) {
-    if (!supplier.name || !supplier.email || !supplier.phone || !supplier.address) {
+    if (!supplier.companyName || !supplier.name || !supplier.email || !supplier.phone) {
       throw new InvariantError('Please provide all required fields');
     }
 

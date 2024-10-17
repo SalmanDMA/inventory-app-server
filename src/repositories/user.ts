@@ -78,7 +78,7 @@ export class UserRepository {
   }
 
   async save(user: IUser): Promise<IUser> {
-    const { role, avatar, warehouses, sales, ...userData } = user;
+    const { role, avatar, warehouses, productHistories, ...userData } = user;
 
     const savedUser = await prisma.users.update({
       where: {
@@ -93,7 +93,7 @@ export class UserRepository {
   }
 
   async create(user: IUser): Promise<IUser> {
-    const { role, avatar, warehouses, sales, ...userData } = user;
+    const { role, avatar, warehouses, productHistories, ...userData } = user;
 
     const createdUser = await prisma.users.create({
       data: {
