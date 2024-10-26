@@ -17,10 +17,15 @@ export const successResponse = <T>(res: Response, message: string, status = 200,
   return res.status(status).json(responseData);
 };
 
-export const errorResponse = (res: Response, message: string): Response => {
+export const errorResponse = (res: Response, message: string, status = 500): Response => {
   const responseData: ResponseData<null> = {
     success: false,
     message,
   };
-  return res.status(500).json(responseData);
+
+  if (message.toLowerCase().includes('foreign key constraint')) {
+    responseData.message = 'Cannot delete data as it is in use in other tables.';
+  }
+
+  return res.status(status).json(responseData);
 };

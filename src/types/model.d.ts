@@ -41,6 +41,11 @@ export interface IUser {
   productHistories: IProductHistory[];
 }
 
+export interface IUserLogin {
+  id: string;
+  role: string;
+}
+
 export interface IRole {
   roleId: string;
   name: string;
