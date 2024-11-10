@@ -3,13 +3,15 @@ import NotFoundError from '../exeptions/NotFoundError';
 import { BrandRepository } from '../repositories/brand';
 import { CategoryRepository } from '../repositories/category';
 import { ProductRepository } from '../repositories/product';
-import { IProduct } from '../types/model';
+import { IProduct, IProductHistory, IUserLogin } from '../types/model';
 import { v4 as uuidv4 } from 'uuid';
 import { getUpdatedFields } from '../utils/common';
+import { ProductHistoryRepository } from '../repositories/productHistory';
 
 const productRepository = new ProductRepository();
 const brandRepository = new BrandRepository();
 const categoryRepository = new CategoryRepository();
+const productHistoryRepository = new ProductHistoryRepository();
 
 export class ProductService {
   async getProducts() {
@@ -26,7 +28,7 @@ export class ProductService {
     return product;
   }
 
-  async updateProduct(product: IProduct) {
+  async updateProduct(product: IProduct, userLogin: IUserLogin) {
     const productData = await productRepository.getProductById(product.productId);
 
     if (!productData) {
@@ -57,6 +59,17 @@ export class ProductService {
       updatedFields.brandId = product.brandId;
     }
 
+    if (product.price !== productData.price) {
+      await productHistoryRepository.createProductHistory({
+        productId: product.productId,
+        oldPrice: productData.price,
+        newPrice: product.price,
+        userId: userLogin.id,
+      } as IProductHistory);
+  
+      updatedFields.price = product.price;
+    }
+
     if (Object.keys(updatedFields).length === 0) {
       return productData;
     }
@@ -69,7 +82,7 @@ export class ProductService {
     return updatedProduct;
   }
 
-  async createProduct(product: IProduct) {
+  async createProduct(product: IProduct, userLogin: IUserLogin) {
     if (
       !product.name ||
       !product.price ||
@@ -101,6 +114,14 @@ export class ProductService {
     product.sku = `${categoryAlias}-${brandAlias}-${uniqueCode}`;
 
     const createdProduct = await productRepository.createProduct(product);
+
+    await productHistoryRepository.createProductHistory({
+      productId: createdProduct.productId,
+      oldPrice: 0,
+      newPrice: product.price,
+      userId: userLogin.id,
+    } as IProductHistory);
+
     return createdProduct;
   }
 
@@ -131,7 +152,17 @@ export class ProductService {
       if (!productData) {
         throw new NotFoundError(`Product with ID ${productId} not found, please register first`);
       }
+  
+      const allProductHistories = await productHistoryRepository.getAllProductHistoriesByProductId(productId);
+  
+      await Promise.all(
+        allProductHistories.map(async (productHistory) => {
+          await productHistoryRepository.forceDelete(productHistory.productHistoryId);
+        })
+      );
+  
       await productRepository.forceDelete(productData.productId);
     }
   }
+  
 }

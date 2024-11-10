@@ -10,6 +10,7 @@ import {
 } from '../controllers/product';
 import { validationCreateProduct, validationSendIds, validationUpdateProduct } from '../validation/product';
 import { authCheck, verifyAdmin } from '../middlewares/auth';
+import { getProductHistoriesByProductId } from '../controllers/productHistory';
 
 const router = Router();
 
@@ -22,5 +23,6 @@ router.delete('/force-delete', verifyAdmin, validationSendIds, forceDeleteProduc
 
 router.get('/:id', getProductById);
 router.put('/:id', verifyAdmin, validationUpdateProduct, updateProduct);
+router.get('/:id/histories', verifyAdmin, getProductHistoriesByProductId);
 
 export default router;

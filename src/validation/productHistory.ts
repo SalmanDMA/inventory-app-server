@@ -4,11 +4,6 @@ import InvariantError from '../exeptions/InvariantError';
 
 const validationCreateProductHistory = [
   body('productId').notEmpty().withMessage('Name needs to be filled').isString().withMessage('Name must be a string'),
-  body('oldPrice')
-    .notEmpty()
-    .withMessage('Old Price needs to be filled')
-    .isNumeric()
-    .withMessage('Old Price must be a number'),
   body('newPrice')
     .notEmpty()
     .withMessage('New Price needs to be filled')

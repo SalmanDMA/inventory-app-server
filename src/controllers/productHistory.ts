@@ -14,6 +14,27 @@ export const getProductHistories = async (req: Request, res: Response): Promise<
   }
 };
 
+export const getUniqueProductHistories = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const productHistories = await productHistoryService.getUniqueProductHistories();
+    successResponse(res, 'Product history retrieved successfully', 200, productHistories);
+  } catch (error) {
+    const errorMessage = (error as Error).message || 'Something went wrong';
+    errorResponse(res, errorMessage);
+  }
+}
+
+export const getProductHistoriesByProductId = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { productId } = req.params;
+    const productHistories = await productHistoryService.getProductHistoriesByProductId(productId);
+    successResponse(res, 'Product history retrieved successfully', 200, productHistories);
+  } catch (error) {
+    const errorMessage = (error as Error).message || 'Something went wrong';
+    errorResponse(res, errorMessage);
+  }
+};
+
 export const getProductHistoryById = async (req: Request, res: Response): Promise<void> => {
   try {
     const { id } = req.params;

@@ -21,6 +21,82 @@ export class ProductHistoryRepository {
     return productHistories as unknown as IProductHistory[];
   }
 
+  async getAllUniqueProductHistories(): Promise<IProductHistory[]> {
+    const productHistories = await prisma.productHistories.groupBy({
+      by: ['productId'],
+      _max: {
+        createdAt: true,
+      },
+    });
+  
+    const latestProductIds = productHistories.map(history => history.productId);
+    const latestHistories = await prisma.productHistories.findMany({
+      where: {
+        productId: {
+          in: latestProductIds,
+        },
+        createdAt: {
+          in: productHistories.map(history => history._max.createdAt as Date),
+        },
+      },
+      include: {
+        product: {
+          include: {
+            brand: true,
+            category: true,
+            supplier: true,
+          },
+        },
+        user: true,
+      },
+    });
+  
+    return latestHistories as unknown as IProductHistory[];
+  }
+
+  async getLatestProductHistoryByProductId(productId: string): Promise<IProductHistory | null> {
+    const latestProductHistory = await prisma.productHistories.findFirst({
+      where: {
+        productId,
+      },
+      orderBy: {
+        createdAt: 'desc',
+      },
+      include: {
+        product: {
+          include: {
+            brand: true,
+            category: true,
+            supplier: true,
+          },
+        },
+        user: true,
+      },
+    });
+
+    return latestProductHistory as unknown as IProductHistory;
+  }
+
+  async getAllProductHistoriesByProductId(productId: string): Promise<IProductHistory[]> {
+    const productHistories = await prisma.productHistories.findMany({
+      where: {
+        productId,
+      },
+      include: {
+        product: {
+          include: {
+            brand: true,
+            category: true,
+            supplier: true,
+          },
+        },
+        user: true,
+      },
+    });
+
+    return productHistories as unknown as IProductHistory[];
+  }
+
   async getProductHistoryById(id: string): Promise<IProductHistory | null> {
     const productHistory = await prisma.productHistories.findUnique({
       where: {

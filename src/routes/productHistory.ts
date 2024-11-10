@@ -3,7 +3,9 @@ import {
   createProductHistory,
   forceDeleteProductHistories,
   getProductHistories,
+  getProductHistoriesByProductId,
   getProductHistoryById,
+  getUniqueProductHistories,
   restoreProductHistories,
   softDeleteProductHistories,
   updateProductHistory,
@@ -19,6 +21,7 @@ const router = Router();
 
 router.use(authCheck);
 router.get('/', verifyAdmin, getProductHistories);
+router.get('/unique', verifyAdmin, getUniqueProductHistories);
 router.post('/', verifyAdmin, validationCreateProductHistory, createProductHistory);
 router.put('/soft-delete', verifyAdmin, validationSendIds, softDeleteProductHistories);
 router.put('/restore', verifyAdmin, validationSendIds, restoreProductHistories);

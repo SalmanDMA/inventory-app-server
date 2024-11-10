@@ -27,7 +27,7 @@ export const getProductById = async (req: Request, res: Response): Promise<void>
 
 export const createProduct = async (req: Request, res: Response): Promise<void> => {
   try {
-    const product = await productService.createProduct(req.body);
+    const product = await productService.createProduct(req.body, req.user);
     successResponse(res, 'Product created successfully', 201, product);
   } catch (error) {
     const errorMessage = (error as Error).message || 'Something went wrong';
@@ -42,7 +42,7 @@ export const updateProduct = async (req: Request, res: Response): Promise<void> 
       ...req.body,
       productId: id,
     };
-    const product = await productService.updateProduct(dataToSend);
+    const product = await productService.updateProduct(dataToSend, req.user);
     successResponse(res, 'Product updated successfully', 200, product);
   } catch (error) {
     const errorMessage = (error as Error).message || 'Something went wrong';
