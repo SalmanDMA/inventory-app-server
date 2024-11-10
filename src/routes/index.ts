@@ -17,6 +17,7 @@ import brandRoutes from './brand';
 import supplierRoutes from './supplier';
 import customerRoutes from './customer';
 import productHistoryRoutes from './productHistory';
+import stockMovementRoutes from './stockMovement';
 
 const apiRouter = express.Router();
 
@@ -28,6 +29,7 @@ apiRouter.use('/dashboard', dashboardRoutes);
 apiRouter.use('/products/categories', categoryRoutes);
 apiRouter.use('/products/brands', brandRoutes);
 apiRouter.use('/products/histories', productHistoryRoutes);
+apiRouter.use('/products/stockMovements', stockMovementRoutes);
 apiRouter.use('/products', productRoutes);
 apiRouter.use('/users', userRoutes);
 apiRouter.use('/roles', roleRoutes);
