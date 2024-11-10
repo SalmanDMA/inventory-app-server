@@ -9,18 +9,20 @@ import {
   updateBrand,
 } from '../controllers/brand';
 import { validationCreateBrand, validationSendIds, validationUpdateBrand } from '../validation/brand';
-import { authCheck, verifyAdmin } from '../middlewares/auth';
+import { authCheck } from '../middlewares/auth';
+import { checkModuleAccess } from '../middlewares/checkModuleAccess';
+
 
 const router = Router();
 
-router.use(authCheck);
-router.get('/', verifyAdmin, getBrands);
-router.post('/', verifyAdmin, validationCreateBrand, createBrand);
-router.put('/soft-delete', verifyAdmin, validationSendIds, softDeleteBrands);
-router.put('/restore', verifyAdmin, validationSendIds, restoreBrands);
-router.delete('/force-delete', verifyAdmin, validationSendIds, forceDeleteBrands);
+router.use(authCheck, checkModuleAccess('brand'));
+router.get('/', getBrands);
+router.post('/', validationCreateBrand, createBrand);
+router.put('/soft-delete', validationSendIds, softDeleteBrands);
+router.put('/restore', validationSendIds, restoreBrands);
+router.delete('/force-delete', validationSendIds, forceDeleteBrands);
 
 router.get('/:id', getBrandById);
-router.put('/:id', verifyAdmin, validationUpdateBrand, updateBrand);
+router.put('/:id', validationUpdateBrand, updateBrand);
 
 export default router;

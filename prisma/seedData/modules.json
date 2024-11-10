@@ -4,7 +4,7 @@
     "moduleTypeId": "53641a8f-976c-4062-b1d6-49e013bd8778",
     "parentId": null,
     "path": "/1/",
-    "name": "Dashboard",
+    "name": "dashboard",
     "icon": "Layout",
     "route": "/dashboard",
     "description": "Module for dashboard"
@@ -14,7 +14,7 @@
     "moduleTypeId": "53641a8f-976c-4062-b1d6-49e013bd8778",
     "parentId": null,
     "path": "/2/",
-    "name": "Management",
+    "name": "management",
     "icon": "FolderPlus",
     "route": null,
     "description": "Module for management"
@@ -24,7 +24,7 @@
     "moduleTypeId": "c2dfc5bc-e84c-490c-89a9-9dd3c5e4f18f",
     "parentId": 2,
     "path": "/2/3/",
-    "name": "Users",
+    "name": "users",
     "icon": "Users",
     "route": "/dashboard/users",
     "description": "Module for users"
@@ -34,7 +34,7 @@
     "moduleTypeId": "c2dfc5bc-e84c-490c-89a9-9dd3c5e4f18f",
     "parentId": 2,
     "path": "/2/4/",
-    "name": "Roles",
+    "name": "roles",
     "icon": "Gamepad2",
     "route": "/dashboard/roles",
     "description": "Module for roles"
@@ -44,7 +44,7 @@
     "moduleTypeId": "c2dfc5bc-e84c-490c-89a9-9dd3c5e4f18f",
     "parentId": 2,
     "path": "/2/5/",
-    "name": "Modules",
+    "name": "modules",
     "icon": "Layers",
     "route": "/dashboard/modules",
     "description": "Module for modules"
@@ -54,7 +54,7 @@
     "moduleTypeId": "53641a8f-976c-4062-b1d6-49e013bd8778",
     "parentId": null,
     "path": "/6/",
-    "name": "Products",
+    "name": "products",
     "icon": "FolderPlus",
     "route": null,
     "description": "Module for product"
@@ -64,7 +64,7 @@
     "moduleTypeId": "c2dfc5bc-e84c-490c-89a9-9dd3c5e4f18f",
     "parentId": 6,
     "path": "/6/7/",
-    "name": "Data",
+    "name": "data",
     "icon": "PackageSearch",
     "route": "/dashboard/products",
     "description": "Module for product data"
@@ -74,7 +74,7 @@
     "moduleTypeId": "c2dfc5bc-e84c-490c-89a9-9dd3c5e4f18f",
     "parentId": 6,
     "path": "/6/8/",
-    "name": "Category",
+    "name": "category",
     "icon": "ChartBarStacked",
     "route": "/dashboard/products/categories",
     "description": "Module for product category"
@@ -84,7 +84,7 @@
     "moduleTypeId": "c2dfc5bc-e84c-490c-89a9-9dd3c5e4f18f",
     "parentId": 6,
     "path": "/6/9/",
-    "name": "Brand",
+    "name": "brand",
     "icon": "Dices",
     "route": "/dashboard/products/brands",
     "description": "Module for product brand"
@@ -94,7 +94,7 @@
     "moduleTypeId": "c2dfc5bc-e84c-490c-89a9-9dd3c5e4f18f",
     "parentId": null,
     "path": "/10/",
-    "name": "Supplier",
+    "name": "supplier",
     "icon": "BookUser",
     "route": "/dashboard/suppliers",
     "description": "Module for product supplier"
@@ -104,7 +104,7 @@
     "moduleTypeId": "53641a8f-976c-4062-b1d6-49e013bd8778",
     "parentId": null,
     "path": "/11/",
-    "name": "Warehouse",
+    "name": "warehouse",
     "icon": "Warehouse",
     "route": "/dashboard/warehouses",
     "description": "Module for warehouse"

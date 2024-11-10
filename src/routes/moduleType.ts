@@ -1,19 +1,20 @@
 import { Router } from 'express';
 import {
-  createModuleType,
-  forceDeleteModuleTypes,
-  getModulesTypes,
-  getModuleTypeById,
-  restoreModuleTypes,
-  softDeleteModuleTypes,
-  updateModuleType,
+	createModuleType,
+	forceDeleteModuleTypes,
+	getModulesTypes,
+	getModuleTypeById,
+	restoreModuleTypes,
+	softDeleteModuleTypes,
+	updateModuleType,
 } from '../controllers/moduleType';
 import { validationCreateModuleType, validationSendIds, validationUpdateModuleType } from '../validation/moduleType';
-import { authCheck, verifyAdmin } from '../middlewares/auth';
+import { authCheck } from '../middlewares/auth';
+import { checkModuleAccess } from '../middlewares/checkModuleAccess';
 
 const router = Router();
 
-router.use(authCheck, verifyAdmin);
+router.use(authCheck, checkModuleAccess('moduleType'));
 router.get('/', getModulesTypes);
 router.post('/', validationCreateModuleType, createModuleType);
 router.put('/soft-delete', validationSendIds, softDeleteModuleTypes);

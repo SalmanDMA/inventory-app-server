@@ -1,28 +1,29 @@
 import { Router } from 'express';
 import {
-  createProduct,
-  forceDeleteProducts,
-  getProductById,
-  getProducts,
-  restoreProducts,
-  softDeleteProducts,
-  updateProduct,
+	createProduct,
+	forceDeleteProducts,
+	getProductById,
+	getProducts,
+	restoreProducts,
+	softDeleteProducts,
+	updateProduct,
 } from '../controllers/product';
 import { validationCreateProduct, validationSendIds, validationUpdateProduct } from '../validation/product';
-import { authCheck, verifyAdmin } from '../middlewares/auth';
+import { authCheck } from '../middlewares/auth';
+import { checkModuleAccess } from '../middlewares/checkModuleAccess';
 import { getProductHistoriesByProductId } from '../controllers/productHistory';
 
 const router = Router();
 
-router.use(authCheck);
-router.get('/', verifyAdmin, getProducts);
-router.post('/', verifyAdmin, validationCreateProduct, createProduct);
-router.put('/soft-delete', verifyAdmin, validationSendIds, softDeleteProducts);
-router.put('/restore', verifyAdmin, validationSendIds, restoreProducts);
-router.delete('/force-delete', verifyAdmin, validationSendIds, forceDeleteProducts);
+router.use(authCheck, checkModuleAccess('product'));
+router.get('/', getProducts);
+router.post('/', validationCreateProduct, createProduct);
+router.put('/soft-delete', validationSendIds, softDeleteProducts);
+router.put('/restore', validationSendIds, restoreProducts);
+router.delete('/force-delete', validationSendIds, forceDeleteProducts);
 
 router.get('/:id', getProductById);
-router.put('/:id', verifyAdmin, validationUpdateProduct, updateProduct);
-router.get('/:id/histories', verifyAdmin, getProductHistoriesByProductId);
+router.put('/:id', validationUpdateProduct, updateProduct);
+router.get('/:id/histories', getProductHistoriesByProductId);
 
 export default router;

@@ -9,18 +9,19 @@ import {
   updateCustomer,
 } from '../controllers/customer';
 import { validationCreateCustomer, validationSendIds, validationUpdateCustomer } from '../validation/customer';
-import { authCheck, verifyAdmin } from '../middlewares/auth';
+import { authCheck } from '../middlewares/auth';
+import { checkModuleAccess } from '../middlewares/checkModuleAccess';
 
 const router = Router();
 
-router.use(authCheck);
-router.get('/', verifyAdmin, getCustomers);
-router.post('/', verifyAdmin, validationCreateCustomer, createCustomer);
-router.put('/soft-delete', verifyAdmin, validationSendIds, softDeleteCustomers);
-router.put('/restore', verifyAdmin, validationSendIds, restoreCustomers);
-router.delete('/force-delete', verifyAdmin, validationSendIds, forceDeleteCustomers);
+router.use(authCheck, checkModuleAccess('customer'));
+router.get('/', getCustomers);
+router.post('/', validationCreateCustomer, createCustomer);
+router.put('/soft-delete', validationSendIds, softDeleteCustomers);
+router.put('/restore', validationSendIds, restoreCustomers);
+router.delete('/force-delete', validationSendIds, forceDeleteCustomers);
 
 router.get('/:id', getCustomerById);
-router.put('/:id', verifyAdmin, validationUpdateCustomer, updateCustomer);
+router.put('/:id', validationUpdateCustomer, updateCustomer);
 
 export default router;

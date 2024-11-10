@@ -9,11 +9,12 @@ import {
   updateCategory,
 } from '../controllers/category';
 import { validationCreateCategory, validationSendIds, validationUpdateCategory } from '../validation/category';
-import { authCheck, verifyAdmin } from '../middlewares/auth';
+import { authCheck} from '../middlewares/auth';
+import { checkModuleAccess } from '../middlewares/checkModuleAccess';
 
 const router = Router();
 
-router.use(authCheck, verifyAdmin);
+router.use(authCheck, checkModuleAccess('category'));
 router.get('/', getCategories);
 router.post('/', validationCreateCategory, createCategory);
 router.put('/soft-delete', validationSendIds, softDeleteCategories);

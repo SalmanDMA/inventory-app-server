@@ -27,14 +27,4 @@ const authCheck = async (req: Request, res: Response, next: NextFunction): Promi
   }
 };
 
-const verifyAdmin = (req: Request, res: Response, next: NextFunction) => {
-  const user = req.user;
-
-  if (!user || user.role.toLocaleLowerCase() !== 'admin') {
-    return res.status(403).json({ message: 'Access denied. Admins only.' });
-  }
-
-  next();
-};
-
-export { authCheck, verifyAdmin };
+export { authCheck };

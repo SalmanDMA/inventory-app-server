@@ -2,30 +2,34 @@ import jwt from 'jsonwebtoken';
 import InvariantError from '../exeptions/InvariantError';
 
 export interface IGenerateToken {
-  payload: {
-    id: string;
-    role: string;
-  };
-  expiresIn: number;
+	payload: {
+		id: string;
+		name: string;
+		roleName: string;
+		roleId: string;
+	};
+	expiresIn: number;
 }
 
 export interface IPayload {
-  id: string;
-  role: string;
+	id: string;
+	name: string;
+	roleName: string;
+	roleId: string;
 }
 
 const generateToken = ({ payload, expiresIn }: IGenerateToken): string => {
-  const token = jwt.sign(payload as object, process.env.JWT_SECRET_KEY as string, { expiresIn });
-  return token;
+	const token = jwt.sign(payload as object, process.env.JWT_SECRET_KEY as string, { expiresIn });
+	return token;
 };
 
 const verifyToken = (token: string): IPayload => {
-  try {
-    const payload = jwt.verify(token, process.env.JWT_SECRET_KEY as string) as IPayload;
-    return payload;
-  } catch (error) {
-    throw new InvariantError('Invalid token or expired token. Please try again.');
-  }
+	try {
+		const payload = jwt.verify(token, process.env.JWT_SECRET_KEY as string) as IPayload;
+		return payload;
+	} catch (error) {
+		throw new InvariantError('Invalid token or expired token. Please try again.');
+	}
 };
 
 export { generateToken, verifyToken };

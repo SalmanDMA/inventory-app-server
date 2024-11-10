@@ -1,18 +1,19 @@
 import { Router } from 'express';
 import { authCheck } from '../middlewares/auth';
+import { checkModuleAccess } from '../middlewares/checkModuleAccess';
 import {
-  createUpload,
-  forceDeleteUpload,
-  getUploads,
-  restoreUpload,
-  softDeleteUpload,
-  updateUpload,
+	createUpload,
+	forceDeleteUpload,
+	getUploads,
+	restoreUpload,
+	softDeleteUpload,
+	updateUpload,
 } from '../controllers/upload';
 import { validationCreateUpload, validationSendIds, validationUpdateUpload } from '../validation/upload';
 
 const router = Router();
 
-router.use(authCheck);
+router.use(authCheck, checkModuleAccess('upload'));
 router.get('/', getUploads);
 router.post('/', validationCreateUpload, createUpload);
 router.put('/soft-delete', validationSendIds, softDeleteUpload);
